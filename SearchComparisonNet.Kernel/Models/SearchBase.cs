@@ -18,7 +18,7 @@ public abstract class SearchBase
         get => Data[index];
         set
         {
-            if (0 > index || index > NoOfEntries - 1)
+            if (index < 0 || index >= NoOfEntries)
             { throw new IndexOutOfRangeException(IndexOutOfRangeError); }
 
             Data[index] = value;

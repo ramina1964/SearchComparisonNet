@@ -10,11 +10,11 @@ public class TestBase
         BinarySut = new BinarySearch(DataGenerator);
     }
 
-    public DataParameters DataParameters { get; set; }
+    protected DataParameters DataParameters { get; }
 
-    public SearchBase LinearSut { get; set; }
+    protected SearchBase LinearSut { get; }
 
-    public SearchBase BinarySut { get; set; }
+    protected SearchBase BinarySut { get; }
 
-    public DataGenerator DataGenerator { get; }
+    protected DataGenerator DataGenerator { get; }
 }

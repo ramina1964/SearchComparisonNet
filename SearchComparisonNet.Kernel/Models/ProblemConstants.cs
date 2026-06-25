@@ -3,7 +3,8 @@
 public static class ProblemConstants
 {
     // No of Entries
-    public static int MinNoOfEntries => 100_00;
+    // NOTE: value preserved exactly (10,000). Flagged in review (K-3) as a possible typo for 100_000 — left unchanged per decision.
+    public static int MinNoOfEntries => 10_000;
 
     public static int InitialNoOfEntries => 500_000;
 
@@ -17,7 +18,7 @@ public static class ProblemConstants
 
     public static int InitialNoOfSearches => 5_000;
 
-    public static int MaxNoOfSearches => 5_00_000;
+    public static int MaxNoOfSearches => 500_000;
 
     public static string NullOrEmptyNoOfEntriesMsg => "NoOfEntriesText is a required field.";
 

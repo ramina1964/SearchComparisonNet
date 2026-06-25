@@ -1,50 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace SearchComparisonNet.GUI.Converters
+namespace SearchComparisonNet.GUI.Converters;
+
+public class NegativeConverter : MarkupExtension, IValueConverter
 {
-    public class NegativeConverter : MarkupExtension, IValueConverter
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        => ReturnNegative(value);
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        => ReturnNegative(value);
+
+    private static object ReturnNegative(object value) => value switch
     {
-        public NegativeConverter() : base() { }
+        bool b => !b,
+        byte n => -1 * n,
+        short n => -1 * n,
+        int n => -1 * n,
+        long n => -1L * n,
+        float n => -1f * n,
+        double n => -1d * n,
+        decimal n => -1m * n,
+        null => throw new ArgumentNullException(nameof(value)),
+        _ => throw new NotSupportedException($"Type '{value.GetType()}' is not supported by {nameof(NegativeConverter)}.")
+    };
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            => ReturnNegative(value);
+    public override object ProvideValue(IServiceProvider serviceProvider)
+        => _converter ??= new NegativeConverter();
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            => ReturnNegative(value);
-
-        private static object ReturnNegative(object value)
-        {
-            object result = null;
-            Dictionary<Type, Action> @switch = new Dictionary<Type, Action>()
-            {
-                { typeof(bool), () => result = !(bool)value },
-                { typeof(byte), () => result = -1 * (byte)value },
-                { typeof(short), () => result = -1 * (short)value },
-                { typeof(int), () => result = -1 * (int)value },
-                { typeof(long), () => result = -1 * (long)value },
-                { typeof(float), () => result = -1f * (float)value },
-                { typeof(double), () => result = -1d * (double)value },
-                { typeof(decimal), () => result = -1m * (decimal)value }
-            };
-
-            @switch[value.GetType()]();
-            return result ?? throw new NotImplementedException();
-        }
-
-        public override object ProvideValue(IServiceProvider serviceProvider)
-        {
-            if (_converter == null)
-            {
-                _converter = new NegativeConverter();
-            }
-
-            return _converter;
-        }
-
-        private static NegativeConverter _converter = null;
-    }
+    private static NegativeConverter _converter;
 }

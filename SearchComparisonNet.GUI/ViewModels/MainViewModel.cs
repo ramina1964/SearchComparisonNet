@@ -17,11 +17,11 @@ public class MainViewModel : ViewModelBase
     }
 
     /************************************ Public Attributes ************************************/
-    public RelayCommand SimulateCommand { get; set; }
+    public RelayCommand SimulateCommand { get; }
 
-    public RelayCommand CancelCommand { get; set; }
+    public RelayCommand CancelCommand { get; }
 
-    public InputValidation InputValidation { get; set; }
+    public InputValidation InputValidation { get; }
 
     public ISearchItem SearchItem { get; set; }
 
@@ -249,7 +249,7 @@ public class MainViewModel : ViewModelBase
             var stopwatch = Stopwatch.StartNew();
             for (var j = 0; j < NoOfSearches; j++)
             {
-                var value = LinearSearch.NextRandomNo();
+                var value = BinarySearch.NextRandomNo();
                 var searchItem = BinarySearch.FindItem(value);
                 totalNoOfIterations += searchItem.NoOfIterations;
                 ProgressBarValue = 100 * (j + 1) / NoOfSearches;
@@ -322,11 +322,6 @@ public class MainViewModel : ViewModelBase
     private bool IsInputValid => IsNoOfEntriesValid && IsNoOfSearchesValid;
 
     /***************************************** Private Fields ******************************************/
-    private static readonly long MinProductValue = (long)1e5;
-    private static readonly long MaxProductValue = (long)5e10;
-    private static readonly string MaxProductError =
-        $"Product of No. of searches and No. of entries must be in the interval [{MinProductValue}, {MaxProductValue}].";
-
     private int? _targetValue;
     private string _noOfEntriesText;
     private string _noOfSearchesText;
