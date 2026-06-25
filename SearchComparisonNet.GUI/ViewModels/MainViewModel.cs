@@ -4,7 +4,10 @@ public class MainViewModel : ViewModelBase
 {
     public MainViewModel()
     {
-        SimulateCommand = new RelayCommand(Simulate, CanSimulate);
+        SimulateCommand = new AsyncRelayCommand(SimulateAsync, CanSimulate);
+        // AsyncRelayCommand exposes cancellation as a Cancel() method (not a command in this
+        // toolkit version), so Cancel just forwards to it. CanCancel keeps the button enabled
+        // only while a simulation is actually running.
         CancelCommand = new RelayCommand(Cancel, CanCancel);
 
         InputValidation = new InputValidation() { ClassLevelCascadeMode = CascadeMode.Stop };
@@ -17,7 +20,7 @@ public class MainViewModel : ViewModelBase
     }
 
     /************************************ Public Attributes ************************************/
-    public RelayCommand SimulateCommand { get; }
+    public IAsyncRelayCommand SimulateCommand { get; }
 
     public RelayCommand CancelCommand { get; }
 
@@ -190,7 +193,9 @@ public class MainViewModel : ViewModelBase
 
     private bool CanCancel() => IsSimulating;
 
-    private async void Simulate()
+    private void Cancel() => SimulateCommand.Cancel();
+
+    private async Task SimulateAsync(CancellationToken token)
     {
         IsSearchEnabled = false;
         TargetValue = null;
@@ -203,65 +208,84 @@ public class MainViewModel : ViewModelBase
         BinarySearch = new BinarySearch(dataGen);
 
         IsSimulating = true;
-        LinearSearchResults = await SimulateLinearSearchAsync();
-        BinarySearchResults = await SimulateBinarySearchAsync();
 
-        LinearAvgNoOfIterations = LinearSearchResults.AvgNoOfIterations;
-        LinearAvgElapsedTime = LinearSearchResults.AvgElapsedTime;
+        // Progress is reported through IProgress<T>. Because the Progress<T> instance is
+        // created here on the UI thread, its callbacks marshal back to the UI thread, so the
+        // background simulation never touches UI-bound properties directly.
+        var progress = new Progress<double>(value => ProgressBarValue = value);
+        ProgressBarVisibility = Visibility.Visible;
 
-        BinaryAvgNoOfIterations = BinarySearchResults.AvgNoOfIterations;
-        BinaryAvgElapsedTime = BinarySearchResults.AvgElapsedTime;
-        IsSimulating = false;
-        IsSearchEnabled = true;
+        try
+        {
+            LinearSearchResults = await SimulateLinearSearchAsync(progress, token);
+            BinarySearchResults = await SimulateBinarySearchAsync(progress, token);
+
+            LinearAvgNoOfIterations = LinearSearchResults.AvgNoOfIterations;
+            LinearAvgElapsedTime = LinearSearchResults.AvgElapsedTime;
+
+            BinaryAvgNoOfIterations = BinarySearchResults.AvgNoOfIterations;
+            BinaryAvgElapsedTime = BinarySearchResults.AvgElapsedTime;
+
+            IsSearchEnabled = true;
+        }
+        catch (OperationCanceledException)
+        {
+            // Cancellation is a normal outcome, not an error: leave results as-is and keep
+            // the search panel disabled since the run did not complete.
+            IsSearchEnabled = false;
+        }
+        finally
+        {
+            // Always run on the UI thread (continuation after await), so resetting the
+            // progress bar here is thread-safe and deterministic.
+            ProgressBarValue = 0;
+            ProgressBarVisibility = Visibility.Hidden;
+            IsSimulating = false;
+        }
     }
 
-    private void Cancel() { }
-
-    private Task<ISimulationResults> SimulateLinearSearchAsync()
+    private Task<ISimulationResults> SimulateLinearSearchAsync(IProgress<double> progress, CancellationToken token)
     {
-        return Task.Factory.StartNew(() =>
+        return Task.Run(() =>
         {
-            ProgressBarVisibility = Visibility.Visible;
             var totalNoOfIterations = 0.0;
             var stopwatch = Stopwatch.StartNew();
             for (var j = 0; j < NoOfSearches; j++)
             {
+                token.ThrowIfCancellationRequested();
                 var value = LinearSearch.NextRandomNo();
                 var searchItem = LinearSearch.FindItem(value);
                 totalNoOfIterations += searchItem.NoOfIterations;
-                ProgressBarValue = (j + 1) * 100.0 / NoOfSearches;
+                progress.Report((j + 1) * 100.0 / NoOfSearches);
             }
             stopwatch.Stop();
             var timeInSec = (double)stopwatch.ElapsedMilliseconds / 1000;
-            ProgressBarValue = 0;
-            ProgressBarVisibility = Visibility.Hidden;
 
             var elapsedTimeInSec = Math.Round(timeInSec, 1);
             return SimulationResults(totalNoOfIterations, elapsedTimeInSec);
-        });
+        }, token);
     }
 
-    private Task<ISimulationResults> SimulateBinarySearchAsync()
+    private Task<ISimulationResults> SimulateBinarySearchAsync(IProgress<double> progress, CancellationToken token)
     {
-        return Task.Factory.StartNew(() =>
+        return Task.Run(() =>
         {
             var totalNoOfIterations = 0.0;
             var stopwatch = Stopwatch.StartNew();
             for (var j = 0; j < NoOfSearches; j++)
             {
+                token.ThrowIfCancellationRequested();
                 var value = BinarySearch.NextRandomNo();
                 var searchItem = BinarySearch.FindItem(value);
                 totalNoOfIterations += searchItem.NoOfIterations;
-                ProgressBarValue = 100 * (j + 1) / NoOfSearches;
+                progress.Report(100.0 * (j + 1) / NoOfSearches);
             }
             stopwatch.Stop();
             var timeInSec = (double)stopwatch.ElapsedMilliseconds / 1000;
-            ProgressBarValue = 0;
-            ProgressBarVisibility = Visibility.Hidden;
 
             var elapsedTimeInSec = Math.Round(timeInSec, 5);
             return SimulationResults(totalNoOfIterations, elapsedTimeInSec);
-        });
+        }, token);
     }
 
     private ISimulationResults SimulationResults(double totalNoOfIterations, double totalElapsedTime) =>

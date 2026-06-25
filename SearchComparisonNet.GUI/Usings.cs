@@ -13,6 +13,7 @@ global using System.ComponentModel;
 global using System.Diagnostics;
 global using System.Linq;
 global using System.Text;
+global using System.Threading;
 global using System.Threading.Tasks;
 global using System.Windows;
 global using System.Windows.Controls;
