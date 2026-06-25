@@ -1,0 +1,2492 @@
+{
+  "settings": {
+    "components": {
+      "code": true,
+      "binaries": false
+    },
+    "targetId": "net10.0",
+    "targetDisplayName": ".NETCoreApp,Version=v10.0"
+  },
+  "analysisStartTime": "2026-06-25T14:51:28.8070417Z",
+  "analysisEndTime": "2026-06-25T14:51:29.014841Z",
+  "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2270980",
+  "stats": {
+    "summary": {
+      "projects": 3,
+      "issues": 6,
+      "incidents": 107,
+      "effort": 107
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 91,
+        "Optional": 1,
+        "Potential": 15,
+        "Information": 0
+      },
+      "category": {
+        "Project": 3,
+        "NuGet": 2,
+        "Api": 102
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+      "startingProject": true,
+      "issues": 4,
+      "storyPoints": 104,
+      "properties": {
+        "appName": "SearchComparisonNet.GUI",
+        "projectKind": "Wpf",
+        "frameworks": [
+          "net7.0-windows"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 14,
+        "numberOfCodeFiles": 14,
+        "linesTotal": 657,
+        "linesOfCode": 657,
+        "totalApiScanned": 975,
+        "minLinesOfCodeToChange": 102,
+        "maxLinesOfCodeToChange": 102
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "5ef5b50a-6fe0-41a6-a388-31b234f77f5d",
+          "ruleId": "NuGet.0002",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.DependencyInjection, 7.0.0\n\nRecommendation:\n\nRemove Microsoft.Extensions.DependencyInjection, and replace with new package Microsoft.Extensions.DependencyInjection 10.0.9",
+              "protected": "Microsoft.Extensions.DependencyInjection, 7.0.0\n\nRecommendation:\n\nRemove Microsoft.Extensions.DependencyInjection, and replace with new package Microsoft.Extensions.DependencyInjection 10.0.9"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+            "snippet": "Microsoft.Extensions.DependencyInjection, 7.0.0\n\nRecommendation:\n\nRemove Microsoft.Extensions.DependencyInjection, and replace with new package Microsoft.Extensions.DependencyInjection 10.0.9",
+            "protectedSnippet": "Microsoft.Extensions.DependencyInjection, 7.0.0\n\nRecommendation:\n\nRemove Microsoft.Extensions.DependencyInjection, and replace with new package Microsoft.Extensions.DependencyInjection 10.0.9",
+            "label": "Microsoft.Extensions.DependencyInjection 7.0.0",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.DependencyInjection",
+              "PackageVersion": "7.0.0",
+              "PackageNewVersion": "10.0.9",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "47648d18-9852-4815-86b0-855ca78f3486",
+          "ruleId": "Project.0002",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net7.0-windows\nRecommended target framework: net10.0-windows",
+              "protected": "Current target framework: net7.0-windows\nRecommended target framework: net10.0-windows"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+            "snippet": "Current target framework: net7.0-windows\nRecommended target framework: net10.0-windows",
+            "protectedSnippet": "Current target framework: net7.0-windows\nRecommended target framework: net10.0-windows",
+            "properties": {
+              "CurrentTargetFramework": "net7.0-windows",
+              "RecommendedTargetFramework": "net10.0-windows"
+            }
+          }
+        },
+        {
+          "incidentId": "3e7cb3cf-666c-4a3e-9d0e-1533db3c7d13",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "InternalTypeHelper",
+              "protected": "M:System.Windows.Markup.InternalTypeHelper.#ctor"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\GeneratedInternalTypeHelper.g.i.cs",
+            "snippet": "InternalTypeHelper",
+            "protectedSnippet": "M:System.Windows.Markup.InternalTypeHelper.#ctor",
+            "label": "M:System.Windows.Markup.InternalTypeHelper.#ctor",
+            "line": 19,
+            "column": 76
+          }
+        },
+        {
+          "incidentId": "d0bd9aeb-d797-4103-9cfd-3aac74d3234b",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "InternalTypeHelper",
+              "protected": "T:System.Windows.Markup.InternalTypeHelper"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\GeneratedInternalTypeHelper.g.i.cs",
+            "snippet": "InternalTypeHelper",
+            "protectedSnippet": "T:System.Windows.Markup.InternalTypeHelper",
+            "label": "T:System.Windows.Markup.InternalTypeHelper",
+            "line": 19,
+            "column": 76
+          }
+        },
+        {
+          "incidentId": "4cca0153-4192-4578-a5eb-4f50a7198ad8",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "_progressBarVisibility",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "_progressBarVisibility",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 335,
+            "column": 23
+          }
+        },
+        {
+          "incidentId": "c5148216-6658-4a41-9d68-ed4d0bacd6b1",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Hidden;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Hidden;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 259,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "8975165b-5011-4989-a0c2-fc5abdf25114",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Hidden;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Hidden;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 259,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "f6394611-a07c-4e7d-933d-b35aef52333e",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Hidden;",
+              "protected": "F:System.Windows.Visibility.Hidden"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Hidden;",
+            "protectedSnippet": "F:System.Windows.Visibility.Hidden",
+            "label": "F:System.Windows.Visibility.Hidden",
+            "line": 259,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "d2cd3c43-7418-450a-90e4-bf0657f7f020",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Hidden;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Hidden;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 259,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "152afb2f-1e46-4a1b-961d-0b6fdbbd746d",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Hidden;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Hidden;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 236,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "5e5c4f53-6f1f-4c3c-b75c-6a5c7d0ab7ea",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Hidden;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Hidden;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 236,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "3934676b-a9f3-4de4-ba91-9e18276ae26a",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Hidden;",
+              "protected": "F:System.Windows.Visibility.Hidden"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Hidden;",
+            "protectedSnippet": "F:System.Windows.Visibility.Hidden",
+            "label": "F:System.Windows.Visibility.Hidden",
+            "line": 236,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "82243c20-0d18-4c1f-af8e-758fd96abd57",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Hidden;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Hidden;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 236,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "9491a521-a559-4490-a3fc-df3418659f25",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Visible;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Visible;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 223,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "cc45b2dc-d92b-4174-a0d1-04b132921c74",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Visible;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Visible;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 223,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "a2c0a736-084a-4444-97c9-1e028f56cf36",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Visible;",
+              "protected": "F:System.Windows.Visibility.Visible"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Visible;",
+            "protectedSnippet": "F:System.Windows.Visibility.Visible",
+            "label": "F:System.Windows.Visibility.Visible",
+            "line": 223,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "27a4d7df-5870-427a-a4ee-36d4d0e15481",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Visible;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Visible;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 223,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "01f426d7-80c6-4cb0-b64b-ddd2196d96ef",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "set =\u003E SetProperty(ref _progressBarVisibility, value);",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "set =\u003E SetProperty(ref _progressBarVisibility, value);",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 54,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "4b2b3a47-1c66-43be-bd16-bf72e3d3b1ae",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "_progressBarVisibility",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "_progressBarVisibility",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 54,
+            "column": 31
+          }
+        },
+        {
+          "incidentId": "d05cb333-8687-4833-b678-46d3f4a61d90",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "get =\u003E _progressBarVisibility;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "get =\u003E _progressBarVisibility;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 53,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "69fb1877-ea78-4503-a390-2a8b03115961",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "_progressBarVisibility",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "_progressBarVisibility",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 53,
+            "column": 15
+          }
+        },
+        {
+          "incidentId": "1325d46a-96ad-4bef-8a3d-ad9a2c5af321",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public Visibility ProgressBarVisibility",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "public Visibility ProgressBarVisibility",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 51,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "e16fd716-1978-46aa-9079-c03930f2ca65",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Hidden;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Hidden;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 15,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "1d0b005e-478f-4663-aa31-61098095c496",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Hidden;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Hidden;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 15,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "becaf011-f89d-4692-94b5-4d25d0045444",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Hidden;",
+              "protected": "F:System.Windows.Visibility.Hidden"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Hidden;",
+            "protectedSnippet": "F:System.Windows.Visibility.Hidden",
+            "label": "F:System.Windows.Visibility.Hidden",
+            "line": 15,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "6d600096-a9a2-43fd-8f5b-2291b9173b5d",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Hidden;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Hidden;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 15,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "c59fa57e-3c7f-47df-9979-289320b10999",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Hidden;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Hidden;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 15,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "e6c70702-e4fa-4563-a838-f3bb022621e4",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Hidden;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Hidden;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 15,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "76934751-13e8-4d5b-affa-edd1049c0264",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Hidden;",
+              "protected": "F:System.Windows.Visibility.Hidden"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Hidden;",
+            "protectedSnippet": "F:System.Windows.Visibility.Hidden",
+            "label": "F:System.Windows.Visibility.Hidden",
+            "line": 15,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "ca976f7c-e86a-41df-9421-b0deeb14ea75",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ProgressBarVisibility = Visibility.Hidden;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\ViewModels\\MainViewModel.cs",
+            "snippet": "ProgressBarVisibility = Visibility.Hidden;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "line": 15,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "6f63a26a-ca56-43c1-9fe6-3a47df47b6ea",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+              "protected": "T:System.Windows.Application"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\Views\\MainView.g.i.cs",
+            "snippet": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+            "protectedSnippet": "T:System.Windows.Application",
+            "label": "T:System.Windows.Application",
+            "line": 59,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "72f9c769-08ef-49aa-b22a-30a4db15aa20",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+              "protected": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\Views\\MainView.g.i.cs",
+            "snippet": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+            "protectedSnippet": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)",
+            "label": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)",
+            "line": 59,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "22fe350a-748e-489e-a002-50a4944e96e1",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/views/mainview.xaml\u0022, System.UriKind.Relative);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\Views\\MainView.g.i.cs",
+            "snippet": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/views/mainview.xaml\u0022, System.UriKind.Relative);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 56,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "5a26da57-fa1b-4efb-927f-959644a00f48",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/views/mainview.xaml\u0022, System.UriKind.Relative);",
+              "protected": "M:System.Uri.#ctor(System.String,System.UriKind)"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\Views\\MainView.g.i.cs",
+            "snippet": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/views/mainview.xaml\u0022, System.UriKind.Relative);",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String,System.UriKind)",
+            "label": "M:System.Uri.#ctor(System.String,System.UriKind)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 56,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "de8c6b0c-9b3d-4be7-92ba-16813f17b5ff",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void MainView_Loaded(object sender, RoutedEventArgs e)",
+              "protected": "T:System.Windows.RoutedEventArgs"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\Views\\MainView.xaml.cs",
+            "snippet": "private void MainView_Loaded(object sender, RoutedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.RoutedEventArgs",
+            "label": "T:System.Windows.RoutedEventArgs",
+            "line": 13,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "6b784195-497b-4ab2-91ff-86479f088167",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "DataContext = MainViewModel;",
+              "protected": "P:System.Windows.FrameworkElement.DataContext"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\Views\\MainView.xaml.cs",
+            "snippet": "DataContext = MainViewModel;",
+            "protectedSnippet": "P:System.Windows.FrameworkElement.DataContext",
+            "label": "P:System.Windows.FrameworkElement.DataContext",
+            "line": 15,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "b3927d3d-156a-4b89-8ed7-1eb30b27d71c",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Loaded \u002B= MainView_Loaded;",
+              "protected": "T:System.Windows.RoutedEventHandler"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\Views\\MainView.xaml.cs",
+            "snippet": "Loaded \u002B= MainView_Loaded;",
+            "protectedSnippet": "T:System.Windows.RoutedEventHandler",
+            "label": "T:System.Windows.RoutedEventHandler",
+            "line": 7,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "21e99fba-2cfa-4f6c-81cd-3e50366ba92a",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Loaded \u002B= MainView_Loaded;",
+              "protected": "T:System.Windows.RoutedEventHandler"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\Views\\MainView.xaml.cs",
+            "snippet": "Loaded \u002B= MainView_Loaded;",
+            "protectedSnippet": "T:System.Windows.RoutedEventHandler",
+            "label": "T:System.Windows.RoutedEventHandler",
+            "line": 7,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "0fcee304-2eac-4e25-b112-aa216b313f9f",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Loaded \u002B= MainView_Loaded;",
+              "protected": "E:System.Windows.FrameworkElement.Loaded"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\Views\\MainView.xaml.cs",
+            "snippet": "Loaded \u002B= MainView_Loaded;",
+            "protectedSnippet": "E:System.Windows.FrameworkElement.Loaded",
+            "label": "E:System.Windows.FrameworkElement.Loaded",
+            "line": 7,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "9eaeabad-f244-45e0-b8bd-873c08c39062",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public MainView(MainViewModel mainViewModel)\r\n    {\r\n        InitializeComponent();\r\n        Loaded \u002B= MainView_Loaded;\r\n        MainViewModel = mainViewModel;\r\n    }",
+              "protected": "M:System.Windows.Window.#ctor"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\Views\\MainView.xaml.cs",
+            "snippet": "public MainView(MainViewModel mainViewModel)\r\n    {\r\n        InitializeComponent();\r\n        Loaded \u002B= MainView_Loaded;\r\n        MainViewModel = mainViewModel;\r\n    }",
+            "protectedSnippet": "M:System.Windows.Window.#ctor",
+            "label": "M:System.Windows.Window.#ctor",
+            "line": 4,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "66a73f3d-f74d-470a-995a-f281b318cf39",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Loaded \u002B= MainView_Loaded;",
+              "protected": "T:System.Windows.RoutedEventHandler"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\Views\\MainView.xaml.cs",
+            "snippet": "Loaded \u002B= MainView_Loaded;",
+            "protectedSnippet": "T:System.Windows.RoutedEventHandler",
+            "label": "T:System.Windows.RoutedEventHandler",
+            "line": 7,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "70e9e9eb-a68a-43e8-9549-358c2eda6437",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Loaded \u002B= MainView_Loaded;",
+              "protected": "T:System.Windows.RoutedEventHandler"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\Views\\MainView.xaml.cs",
+            "snippet": "Loaded \u002B= MainView_Loaded;",
+            "protectedSnippet": "T:System.Windows.RoutedEventHandler",
+            "label": "T:System.Windows.RoutedEventHandler",
+            "line": 7,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "d6fbcd81-a952-4887-be61-46f3a0bfcd4a",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Loaded \u002B= MainView_Loaded;",
+              "protected": "E:System.Windows.FrameworkElement.Loaded"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\Views\\MainView.xaml.cs",
+            "snippet": "Loaded \u002B= MainView_Loaded;",
+            "protectedSnippet": "E:System.Windows.FrameworkElement.Loaded",
+            "label": "E:System.Windows.FrameworkElement.Loaded",
+            "line": 7,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "22d75577-2907-4614-b5ae-70c1679d6013",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public MainView(MainViewModel mainViewModel)\r\n    {\r\n        InitializeComponent();\r\n        Loaded \u002B= MainView_Loaded;\r\n        MainViewModel = mainViewModel;\r\n    }",
+              "protected": "M:System.Windows.Window.#ctor"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\Views\\MainView.xaml.cs",
+            "snippet": "public MainView(MainViewModel mainViewModel)\r\n    {\r\n        InitializeComponent();\r\n        Loaded \u002B= MainView_Loaded;\r\n        MainViewModel = mainViewModel;\r\n    }",
+            "protectedSnippet": "M:System.Windows.Window.#ctor",
+            "label": "M:System.Windows.Window.#ctor",
+            "line": 4,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "8f5bea6b-877c-46c4-a33d-4838fb5d0cb0",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "IComponentConnector",
+              "protected": "T:System.Windows.Markup.IComponentConnector"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\Views\\MainView.g.i.cs",
+            "snippet": "IComponentConnector",
+            "protectedSnippet": "T:System.Windows.Markup.IComponentConnector",
+            "label": "T:System.Windows.Markup.IComponentConnector",
+            "line": 42,
+            "column": 81
+          }
+        },
+        {
+          "incidentId": "37b257f2-c497-44b8-8518-c0df55fa5d58",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Window",
+              "protected": "T:System.Windows.Window"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\Views\\MainView.xaml.cs",
+            "snippet": "Window",
+            "protectedSnippet": "T:System.Windows.Window",
+            "label": "T:System.Windows.Window",
+            "line": 2,
+            "column": 32
+          }
+        },
+        {
+          "incidentId": "0b3a8b0b-c374-433a-aa58-02ca207fb91d",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+              "protected": "T:System.Windows.Application"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\StatisticsControl.g.i.cs",
+            "snippet": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+            "protectedSnippet": "T:System.Windows.Application",
+            "label": "T:System.Windows.Application",
+            "line": 58,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "1ebdf99a-fa6c-48ff-9e93-7ade9fad6f2c",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+              "protected": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\StatisticsControl.g.i.cs",
+            "snippet": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+            "protectedSnippet": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)",
+            "label": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)",
+            "line": 58,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "a7282200-54a2-4e96-97e6-961ac216e77e",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/statisticscontrol.xaml\u0022, System.UriKind.Relative);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\StatisticsControl.g.i.cs",
+            "snippet": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/statisticscontrol.xaml\u0022, System.UriKind.Relative);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 55,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "fc043ed0-4abf-4b28-8968-7318189b4ac9",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/statisticscontrol.xaml\u0022, System.UriKind.Relative);",
+              "protected": "M:System.Uri.#ctor(System.String,System.UriKind)"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\StatisticsControl.g.i.cs",
+            "snippet": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/statisticscontrol.xaml\u0022, System.UriKind.Relative);",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String,System.UriKind)",
+            "label": "M:System.Uri.#ctor(System.String,System.UriKind)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 55,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "4b005af4-000a-4409-8e29-cdbdc0788298",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public StatisticsControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+              "protected": "M:System.Windows.Controls.UserControl.#ctor"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\UserControls\\StatisticsControl.xaml.cs",
+            "snippet": "public StatisticsControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+            "protectedSnippet": "M:System.Windows.Controls.UserControl.#ctor",
+            "label": "M:System.Windows.Controls.UserControl.#ctor",
+            "line": 6,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "0a1229e1-a8dd-4517-9504-735fe5599240",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public StatisticsControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+              "protected": "M:System.Windows.Controls.UserControl.#ctor"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\UserControls\\StatisticsControl.xaml.cs",
+            "snippet": "public StatisticsControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+            "protectedSnippet": "M:System.Windows.Controls.UserControl.#ctor",
+            "label": "M:System.Windows.Controls.UserControl.#ctor",
+            "line": 6,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "84744d41-b5fc-487e-b242-a17a6ada923f",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "IComponentConnector",
+              "protected": "T:System.Windows.Markup.IComponentConnector"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\StatisticsControl.g.i.cs",
+            "snippet": "IComponentConnector",
+            "protectedSnippet": "T:System.Windows.Markup.IComponentConnector",
+            "label": "T:System.Windows.Markup.IComponentConnector",
+            "line": 41,
+            "column": 104
+          }
+        },
+        {
+          "incidentId": "d00f0a37-5be0-42a7-a40e-eca44b433dbb",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "UserControl",
+              "protected": "T:System.Windows.Controls.UserControl"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\UserControls\\StatisticsControl.xaml.cs",
+            "snippet": "UserControl",
+            "protectedSnippet": "T:System.Windows.Controls.UserControl",
+            "label": "T:System.Windows.Controls.UserControl",
+            "line": 4,
+            "column": 41
+          }
+        },
+        {
+          "incidentId": "e582e918-4683-47bf-8e33-17a521c0c653",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+              "protected": "T:System.Windows.Application"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\InputControl.g.i.cs",
+            "snippet": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+            "protectedSnippet": "T:System.Windows.Application",
+            "label": "T:System.Windows.Application",
+            "line": 58,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "2731f20e-4b49-48f9-b3f7-7a62a52a85ae",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+              "protected": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\InputControl.g.i.cs",
+            "snippet": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+            "protectedSnippet": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)",
+            "label": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)",
+            "line": 58,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "b1852ce2-cd72-42c0-af2f-36df6b5c715c",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/inputcontrol.xaml\u0022, System.UriKind.Relative);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\InputControl.g.i.cs",
+            "snippet": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/inputcontrol.xaml\u0022, System.UriKind.Relative);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 55,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "067cb159-40da-4154-8516-c73acee78ffd",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/inputcontrol.xaml\u0022, System.UriKind.Relative);",
+              "protected": "M:System.Uri.#ctor(System.String,System.UriKind)"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\InputControl.g.i.cs",
+            "snippet": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/inputcontrol.xaml\u0022, System.UriKind.Relative);",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String,System.UriKind)",
+            "label": "M:System.Uri.#ctor(System.String,System.UriKind)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 55,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "09ccc717-a83a-4c6c-b96d-a7a15361c8b1",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public InputControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+              "protected": "M:System.Windows.Controls.UserControl.#ctor"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\UserControls\\InputControl.xaml.cs",
+            "snippet": "public InputControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+            "protectedSnippet": "M:System.Windows.Controls.UserControl.#ctor",
+            "label": "M:System.Windows.Controls.UserControl.#ctor",
+            "line": 4,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "e8a6fb1f-0195-43bb-9037-5bd5117eebf3",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public InputControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+              "protected": "M:System.Windows.Controls.UserControl.#ctor"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\UserControls\\InputControl.xaml.cs",
+            "snippet": "public InputControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+            "protectedSnippet": "M:System.Windows.Controls.UserControl.#ctor",
+            "label": "M:System.Windows.Controls.UserControl.#ctor",
+            "line": 4,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "ddfeef27-c834-4ad2-bc85-b6a82e8e3bc7",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "IComponentConnector",
+              "protected": "T:System.Windows.Markup.IComponentConnector"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\InputControl.g.i.cs",
+            "snippet": "IComponentConnector",
+            "protectedSnippet": "T:System.Windows.Markup.IComponentConnector",
+            "label": "T:System.Windows.Markup.IComponentConnector",
+            "line": 41,
+            "column": 99
+          }
+        },
+        {
+          "incidentId": "2afc0944-4742-469d-b619-24809ebb11d3",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "UserControl",
+              "protected": "T:System.Windows.Controls.UserControl"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\UserControls\\InputControl.xaml.cs",
+            "snippet": "UserControl",
+            "protectedSnippet": "T:System.Windows.Controls.UserControl",
+            "label": "T:System.Windows.Controls.UserControl",
+            "line": 2,
+            "column": 36
+          }
+        },
+        {
+          "incidentId": "5666d2ed-f56a-451d-84cd-92f255f35a0f",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+              "protected": "T:System.Windows.Application"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\SimulationControl.g.i.cs",
+            "snippet": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+            "protectedSnippet": "T:System.Windows.Application",
+            "label": "T:System.Windows.Application",
+            "line": 57,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "277af8bb-6ea2-48c3-bcf9-9f33f3c12a5b",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+              "protected": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\SimulationControl.g.i.cs",
+            "snippet": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+            "protectedSnippet": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)",
+            "label": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)",
+            "line": 57,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "2360dd4c-fef5-4745-b3b0-5c7bc57040ae",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/simulationcontrol.xaml\u0022, System.UriKind.Relative);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\SimulationControl.g.i.cs",
+            "snippet": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/simulationcontrol.xaml\u0022, System.UriKind.Relative);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 54,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "a0007d4d-6b87-42bc-9c66-20abc415177e",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/simulationcontrol.xaml\u0022, System.UriKind.Relative);",
+              "protected": "M:System.Uri.#ctor(System.String,System.UriKind)"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\SimulationControl.g.i.cs",
+            "snippet": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/simulationcontrol.xaml\u0022, System.UriKind.Relative);",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String,System.UriKind)",
+            "label": "M:System.Uri.#ctor(System.String,System.UriKind)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 54,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "55224223-9de7-4057-a9a8-aaac28876f33",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public SimulationControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+              "protected": "M:System.Windows.Controls.UserControl.#ctor"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\UserControls\\SimulationControl.xaml.cs",
+            "snippet": "public SimulationControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+            "protectedSnippet": "M:System.Windows.Controls.UserControl.#ctor",
+            "label": "M:System.Windows.Controls.UserControl.#ctor",
+            "line": 6,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "fd4943ae-98e5-4154-bd04-fe280516e61a",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public SimulationControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+              "protected": "M:System.Windows.Controls.UserControl.#ctor"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\UserControls\\SimulationControl.xaml.cs",
+            "snippet": "public SimulationControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+            "protectedSnippet": "M:System.Windows.Controls.UserControl.#ctor",
+            "label": "M:System.Windows.Controls.UserControl.#ctor",
+            "line": 6,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "b3d40df1-cd8c-4ed4-b488-90eeeb2746b7",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "IComponentConnector",
+              "protected": "T:System.Windows.Markup.IComponentConnector"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\SimulationControl.g.i.cs",
+            "snippet": "IComponentConnector",
+            "protectedSnippet": "T:System.Windows.Markup.IComponentConnector",
+            "label": "T:System.Windows.Markup.IComponentConnector",
+            "line": 40,
+            "column": 104
+          }
+        },
+        {
+          "incidentId": "194a5b55-f56f-4180-afab-976d744dd830",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "UserControl",
+              "protected": "T:System.Windows.Controls.UserControl"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\UserControls\\SimulationControl.xaml.cs",
+            "snippet": "UserControl",
+            "protectedSnippet": "T:System.Windows.Controls.UserControl",
+            "label": "T:System.Windows.Controls.UserControl",
+            "line": 4,
+            "column": 41
+          }
+        },
+        {
+          "incidentId": "91f9e473-3604-4734-9c09-1e7295c73ba0",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+              "protected": "T:System.Windows.Application"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\StatusControl.g.i.cs",
+            "snippet": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+            "protectedSnippet": "T:System.Windows.Application",
+            "label": "T:System.Windows.Application",
+            "line": 57,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "306bcfae-2dbb-403f-95de-2f72f12df1fd",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+              "protected": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\StatusControl.g.i.cs",
+            "snippet": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+            "protectedSnippet": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)",
+            "label": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)",
+            "line": 57,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "af595eb1-e0ef-49c5-9c30-c315c1db2561",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/statuscontrol.xaml\u0022, System.UriKind.Relative);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\StatusControl.g.i.cs",
+            "snippet": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/statuscontrol.xaml\u0022, System.UriKind.Relative);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 54,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "0b0749be-aa10-4037-94b0-ebd872082ef9",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/statuscontrol.xaml\u0022, System.UriKind.Relative);",
+              "protected": "M:System.Uri.#ctor(System.String,System.UriKind)"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\StatusControl.g.i.cs",
+            "snippet": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/statuscontrol.xaml\u0022, System.UriKind.Relative);",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String,System.UriKind)",
+            "label": "M:System.Uri.#ctor(System.String,System.UriKind)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 54,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "4cfa3196-93db-4b6d-b989-c6bfdb9701f3",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public StatusControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+              "protected": "M:System.Windows.Controls.UserControl.#ctor"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\UserControls\\StatusControl.xaml.cs",
+            "snippet": "public StatusControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+            "protectedSnippet": "M:System.Windows.Controls.UserControl.#ctor",
+            "label": "M:System.Windows.Controls.UserControl.#ctor",
+            "line": 6,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "12c03d50-65ce-49c4-8f11-4ffb1a67c2fa",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public StatusControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+              "protected": "M:System.Windows.Controls.UserControl.#ctor"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\UserControls\\StatusControl.xaml.cs",
+            "snippet": "public StatusControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+            "protectedSnippet": "M:System.Windows.Controls.UserControl.#ctor",
+            "label": "M:System.Windows.Controls.UserControl.#ctor",
+            "line": 6,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "aa2b9627-367b-4eab-9748-4c04d9621f50",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "IComponentConnector",
+              "protected": "T:System.Windows.Markup.IComponentConnector"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\StatusControl.g.i.cs",
+            "snippet": "IComponentConnector",
+            "protectedSnippet": "T:System.Windows.Markup.IComponentConnector",
+            "label": "T:System.Windows.Markup.IComponentConnector",
+            "line": 40,
+            "column": 100
+          }
+        },
+        {
+          "incidentId": "4a4060a0-979e-46f1-9535-f56a10d4f9dd",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "UserControl",
+              "protected": "T:System.Windows.Controls.UserControl"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\UserControls\\StatusControl.xaml.cs",
+            "snippet": "UserControl",
+            "protectedSnippet": "T:System.Windows.Controls.UserControl",
+            "label": "T:System.Windows.Controls.UserControl",
+            "line": 4,
+            "column": 37
+          }
+        },
+        {
+          "incidentId": "7559fae9-2fc9-497e-9c5d-e2f6cd4dd821",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+              "protected": "T:System.Windows.Application"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\SearchControl.g.i.cs",
+            "snippet": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+            "protectedSnippet": "T:System.Windows.Application",
+            "label": "T:System.Windows.Application",
+            "line": 57,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "6def68c9-c09e-47dc-94c1-0f92ed970a98",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+              "protected": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\SearchControl.g.i.cs",
+            "snippet": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+            "protectedSnippet": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)",
+            "label": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)",
+            "line": 57,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "4da76698-ad84-46e2-aaa7-4a98f66642d5",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/searchcontrol.xaml\u0022, System.UriKind.Relative);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\SearchControl.g.i.cs",
+            "snippet": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/searchcontrol.xaml\u0022, System.UriKind.Relative);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 54,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "5eb3b835-7427-4dba-b90d-112903072112",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/searchcontrol.xaml\u0022, System.UriKind.Relative);",
+              "protected": "M:System.Uri.#ctor(System.String,System.UriKind)"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\SearchControl.g.i.cs",
+            "snippet": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/usercontrols/searchcontrol.xaml\u0022, System.UriKind.Relative);",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String,System.UriKind)",
+            "label": "M:System.Uri.#ctor(System.String,System.UriKind)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 54,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "4a8160e4-afd5-42ab-9313-9e2aafc61997",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public SearchControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+              "protected": "M:System.Windows.Controls.UserControl.#ctor"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\UserControls\\SearchControl.xaml.cs",
+            "snippet": "public SearchControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+            "protectedSnippet": "M:System.Windows.Controls.UserControl.#ctor",
+            "label": "M:System.Windows.Controls.UserControl.#ctor",
+            "line": 4,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "a9f16880-d6a2-4545-9ac8-9c9e17d2c443",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public SearchControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+              "protected": "M:System.Windows.Controls.UserControl.#ctor"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\UserControls\\SearchControl.xaml.cs",
+            "snippet": "public SearchControl()\r\n    {\r\n        InitializeComponent();\r\n    }",
+            "protectedSnippet": "M:System.Windows.Controls.UserControl.#ctor",
+            "label": "M:System.Windows.Controls.UserControl.#ctor",
+            "line": 4,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "807e021d-757a-4117-b7e8-4509f5e1981c",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "IComponentConnector",
+              "protected": "T:System.Windows.Markup.IComponentConnector"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\UserControls\\SearchControl.g.i.cs",
+            "snippet": "IComponentConnector",
+            "protectedSnippet": "T:System.Windows.Markup.IComponentConnector",
+            "label": "T:System.Windows.Markup.IComponentConnector",
+            "line": 40,
+            "column": 100
+          }
+        },
+        {
+          "incidentId": "30800786-cb72-4508-a53d-8c53789bdec9",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "UserControl",
+              "protected": "T:System.Windows.Controls.UserControl"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\UserControls\\SearchControl.xaml.cs",
+            "snippet": "UserControl",
+            "protectedSnippet": "T:System.Windows.Controls.UserControl",
+            "label": "T:System.Windows.Controls.UserControl",
+            "line": 2,
+            "column": 37
+          }
+        },
+        {
+          "incidentId": "9550251e-88a8-470b-8fa1-dc55cc066d61",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": ": base()",
+              "protected": "M:System.Windows.Markup.MarkupExtension.#ctor"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\Converters\\NegativeConverter.cs",
+            "snippet": ": base()",
+            "protectedSnippet": "M:System.Windows.Markup.MarkupExtension.#ctor",
+            "label": "M:System.Windows.Markup.MarkupExtension.#ctor",
+            "line": 10,
+            "column": 35
+          }
+        },
+        {
+          "incidentId": "a556684c-1875-434f-bf40-176ab2fe2df0",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": ": base()",
+              "protected": "M:System.Windows.Markup.MarkupExtension.#ctor"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\Converters\\NegativeConverter.cs",
+            "snippet": ": base()",
+            "protectedSnippet": "M:System.Windows.Markup.MarkupExtension.#ctor",
+            "label": "M:System.Windows.Markup.MarkupExtension.#ctor",
+            "line": 10,
+            "column": 35
+          }
+        },
+        {
+          "incidentId": "6f289fc8-0e30-44df-8681-8c969f383f77",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "IValueConverter",
+              "protected": "T:System.Windows.Data.IValueConverter"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\Converters\\NegativeConverter.cs",
+            "snippet": "IValueConverter",
+            "protectedSnippet": "T:System.Windows.Data.IValueConverter",
+            "label": "T:System.Windows.Data.IValueConverter",
+            "line": 8,
+            "column": 54
+          }
+        },
+        {
+          "incidentId": "c76d80eb-9d5f-45d0-ad06-e6b196093e4f",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MarkupExtension",
+              "protected": "T:System.Windows.Markup.MarkupExtension"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\Converters\\NegativeConverter.cs",
+            "snippet": "MarkupExtension",
+            "protectedSnippet": "T:System.Windows.Markup.MarkupExtension",
+            "label": "T:System.Windows.Markup.MarkupExtension",
+            "line": 8,
+            "column": 37
+          }
+        },
+        {
+          "incidentId": "0c89f91f-baf8-4a5b-a746-3923ab64f16a",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "IValueConverter",
+              "protected": "T:System.Windows.Data.IValueConverter"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\Converters\\NumStringConverter.cs",
+            "snippet": "IValueConverter",
+            "protectedSnippet": "T:System.Windows.Data.IValueConverter",
+            "label": "T:System.Windows.Data.IValueConverter",
+            "line": 6,
+            "column": 38
+          }
+        },
+        {
+          "incidentId": "390ed76f-dcca-4f50-b277-9215b4ec9251",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "app.Run();",
+              "protected": "M:System.Windows.Application.Run"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\App.g.i.cs",
+            "snippet": "app.Run();",
+            "protectedSnippet": "M:System.Windows.Application.Run",
+            "label": "M:System.Windows.Application.Run",
+            "line": 78,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "3570c068-dcb9-401b-9980-9805ebea5e10",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+              "protected": "T:System.Windows.Application"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\App.g.i.cs",
+            "snippet": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+            "protectedSnippet": "T:System.Windows.Application",
+            "label": "T:System.Windows.Application",
+            "line": 63,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "3b84d2cb-e37a-4b5b-968e-460d72f56168",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+              "protected": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\App.g.i.cs",
+            "snippet": "System.Windows.Application.LoadComponent(this, resourceLocater);",
+            "protectedSnippet": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)",
+            "label": "M:System.Windows.Application.LoadComponent(System.Object,System.Uri)",
+            "line": 63,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "61fd8f04-30a3-415f-9400-14a8a361bdf7",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/app.xaml\u0022, System.UriKind.Relative);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\App.g.i.cs",
+            "snippet": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/app.xaml\u0022, System.UriKind.Relative);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 60,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "6c7af76d-f39f-4101-9db5-560f4288e8af",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/app.xaml\u0022, System.UriKind.Relative);",
+              "protected": "M:System.Uri.#ctor(System.String,System.UriKind)"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\App.g.i.cs",
+            "snippet": "System.Uri resourceLocater = new System.Uri(\u0022/SearchComparisonNet.GUI;V1.0.0.0;component/app.xaml\u0022, System.UriKind.Relative);",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String,System.UriKind)",
+            "label": "M:System.Uri.#ctor(System.String,System.UriKind)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 60,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "138a7cd2-d130-4742-bdf1-a05ef5e97b7d",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "this.Startup \u002B= new System.Windows.StartupEventHandler(this.OnStartup);",
+              "protected": "T:System.Windows.StartupEventHandler"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\App.g.i.cs",
+            "snippet": "this.Startup \u002B= new System.Windows.StartupEventHandler(this.OnStartup);",
+            "protectedSnippet": "T:System.Windows.StartupEventHandler",
+            "label": "T:System.Windows.StartupEventHandler",
+            "line": 56,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "363a7e96-ade7-4f91-8097-1e7fe8bc3561",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "this.Startup \u002B= new System.Windows.StartupEventHandler(this.OnStartup);",
+              "protected": "T:System.Windows.StartupEventHandler"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\App.g.i.cs",
+            "snippet": "this.Startup \u002B= new System.Windows.StartupEventHandler(this.OnStartup);",
+            "protectedSnippet": "T:System.Windows.StartupEventHandler",
+            "label": "T:System.Windows.StartupEventHandler",
+            "line": 56,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "aeb3a837-8aeb-467b-a63c-4be4c2e41a14",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "this.Startup \u002B= new System.Windows.StartupEventHandler(this.OnStartup);",
+              "protected": "E:System.Windows.Application.Startup"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\App.g.i.cs",
+            "snippet": "this.Startup \u002B= new System.Windows.StartupEventHandler(this.OnStartup);",
+            "protectedSnippet": "E:System.Windows.Application.Startup",
+            "label": "E:System.Windows.Application.Startup",
+            "line": 56,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "20eee14b-69c3-4a1e-be91-40db21794424",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void OnStartup(object sender, StartupEventArgs e)",
+              "protected": "T:System.Windows.StartupEventArgs"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\App.xaml.cs",
+            "snippet": "private void OnStartup(object sender, StartupEventArgs e)",
+            "protectedSnippet": "T:System.Windows.StartupEventArgs",
+            "label": "T:System.Windows.StartupEventArgs",
+            "line": 25,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "6d350cb2-c1a5-4ac6-9359-b38f8c440c6b",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "mainView.Show();",
+              "protected": "M:System.Windows.Window.Show"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\App.xaml.cs",
+            "snippet": "mainView.Show();",
+            "protectedSnippet": "M:System.Windows.Window.Show",
+            "label": "M:System.Windows.Window.Show",
+            "line": 28,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "b03ed203-d7a6-4a7b-a85e-58006beed5b7",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public App()\r\n        {\r\n            Services = new ServiceCollection();\r\n            ConfigureServices();\r\n            ServiceProvider = Services.BuildServiceProvider();\r\n        }",
+              "protected": "M:System.Windows.Application.#ctor"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\App.xaml.cs",
+            "snippet": "public App()\r\n        {\r\n            Services = new ServiceCollection();\r\n            ConfigureServices();\r\n            ServiceProvider = Services.BuildServiceProvider();\r\n        }",
+            "protectedSnippet": "M:System.Windows.Application.#ctor",
+            "label": "M:System.Windows.Application.#ctor",
+            "line": 4,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "166d8350-0a6f-4688-bdbe-0d090e8765cc",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public App()\r\n        {\r\n            Services = new ServiceCollection();\r\n            ConfigureServices();\r\n            ServiceProvider = Services.BuildServiceProvider();\r\n        }",
+              "protected": "M:System.Windows.Application.#ctor"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\App.xaml.cs",
+            "snippet": "public App()\r\n        {\r\n            Services = new ServiceCollection();\r\n            ConfigureServices();\r\n            ServiceProvider = Services.BuildServiceProvider();\r\n        }",
+            "protectedSnippet": "M:System.Windows.Application.#ctor",
+            "label": "M:System.Windows.Application.#ctor",
+            "line": 4,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "9b57daa2-6db0-43e0-8d3d-6da1ef746fa3",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "SearchComparisonNet.GUI\\SearchComparisonNet.GUI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Application",
+              "protected": "T:System.Windows.Application"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.GUI\\obj\\Debug\\net7.0-windows\\App.g.i.cs",
+            "snippet": "Application",
+            "protectedSnippet": "T:System.Windows.Application",
+            "label": "T:System.Windows.Application",
+            "line": 40,
+            "column": 46
+          }
+        }
+      ],
+      "features": [
+        {
+          "featureId": "Wpf",
+          "incidents": [
+            "0c89f91f-baf8-4a5b-a746-3923ab64f16a",
+            "c76d80eb-9d5f-45d0-ad06-e6b196093e4f",
+            "6f289fc8-0e30-44df-8681-8c969f383f77",
+            "a556684c-1875-434f-bf40-176ab2fe2df0",
+            "9550251e-88a8-470b-8fa1-dc55cc066d61",
+            "30800786-cb72-4508-a53d-8c53789bdec9",
+            "807e021d-757a-4117-b7e8-4509f5e1981c",
+            "a9f16880-d6a2-4545-9ac8-9c9e17d2c443",
+            "4a8160e4-afd5-42ab-9313-9e2aafc61997",
+            "4a4060a0-979e-46f1-9535-f56a10d4f9dd",
+            "aa2b9627-367b-4eab-9748-4c04d9621f50",
+            "12c03d50-65ce-49c4-8f11-4ffb1a67c2fa",
+            "4cfa3196-93db-4b6d-b989-c6bfdb9701f3",
+            "194a5b55-f56f-4180-afab-976d744dd830",
+            "b3d40df1-cd8c-4ed4-b488-90eeeb2746b7",
+            "fd4943ae-98e5-4154-bd04-fe280516e61a",
+            "55224223-9de7-4057-a9a8-aaac28876f33",
+            "2afc0944-4742-469d-b619-24809ebb11d3",
+            "ddfeef27-c834-4ad2-bc85-b6a82e8e3bc7",
+            "e8a6fb1f-0195-43bb-9037-5bd5117eebf3",
+            "09ccc717-a83a-4c6c-b96d-a7a15361c8b1",
+            "d00f0a37-5be0-42a7-a40e-eca44b433dbb",
+            "84744d41-b5fc-487e-b242-a17a6ada923f",
+            "0a1229e1-a8dd-4517-9504-735fe5599240",
+            "4b005af4-000a-4409-8e29-cdbdc0788298",
+            "8f5bea6b-877c-46c4-a33d-4838fb5d0cb0",
+            "d0bd9aeb-d797-4103-9cfd-3aac74d3234b",
+            "3e7cb3cf-666c-4a3e-9d0e-1533db3c7d13"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "SearchComparisonNet.Kernel\\SearchComparisonNet.Kernel.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "SearchComparisonNet.Kernel",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net7.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 14,
+        "numberOfCodeFiles": 13,
+        "linesTotal": 462,
+        "linesOfCode": 342,
+        "totalApiScanned": 298,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "ef7b39c8-8114-421c-82c2-f7ca952da8e5",
+          "ruleId": "Project.0002",
+          "projectPath": "SearchComparisonNet.Kernel\\SearchComparisonNet.Kernel.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net7.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net7.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.Kernel\\SearchComparisonNet.Kernel.csproj",
+            "snippet": "Current target framework: net7.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net7.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net7.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "SearchComparisonNet.Tests\\SearchComparisonNet.Tests.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 2,
+      "properties": {
+        "appName": "SearchComparisonNet.Tests",
+        "projectKind": "DotNetCoreApp",
+        "frameworks": [
+          "net7.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 6,
+        "numberOfCodeFiles": 4,
+        "linesTotal": 1848,
+        "linesOfCode": 68,
+        "totalApiScanned": 130,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "77d474c3-c417-4dae-9431-98846fa7f01f",
+          "ruleId": "NuGet.0005",
+          "projectPath": "SearchComparisonNet.Tests\\SearchComparisonNet.Tests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "xunit, 2.6.1\n\nRecommendation:\n\nThis package will only be updated for security issues. All future feature work has moved onto v3.\n\nGuide for migrating from xUnit.net v2 to v3: https://xunit.net/docs/getting-started/v3/migration\nRemove xunit, and replace with new package xunit, 2.9.3",
+              "protected": "xunit, 2.6.1\n\nRecommendation:\n\nThis package will only be updated for security issues. All future feature work has moved onto v3.\n\nGuide for migrating from xUnit.net v2 to v3: https://xunit.net/docs/getting-started/v3/migration\nRemove xunit, and replace with new package xunit, 2.9.3"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.Tests\\SearchComparisonNet.Tests.csproj",
+            "snippet": "xunit, 2.6.1\n\nRecommendation:\n\nThis package will only be updated for security issues. All future feature work has moved onto v3.\n\nGuide for migrating from xUnit.net v2 to v3: https://xunit.net/docs/getting-started/v3/migration\nRemove xunit, and replace with new package xunit, 2.9.3",
+            "protectedSnippet": "xunit, 2.6.1\n\nRecommendation:\n\nThis package will only be updated for security issues. All future feature work has moved onto v3.\n\nGuide for migrating from xUnit.net v2 to v3: https://xunit.net/docs/getting-started/v3/migration\nRemove xunit, and replace with new package xunit, 2.9.3",
+            "label": "xunit 2.6.1",
+            "properties": {
+              "PackageId": "xunit",
+              "PackageVersion": "2.6.1",
+              "PackageNewVersion": null,
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "de3a33dd-546c-4f9e-8b5e-71dbcab06468",
+          "ruleId": "Project.0002",
+          "projectPath": "SearchComparisonNet.Tests\\SearchComparisonNet.Tests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net7.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net7.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "SearchComparisonNet.Tests\\SearchComparisonNet.Tests.csproj",
+            "snippet": "Current target framework: net7.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net7.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net7.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    }
+  ],
+  "rules": {
+    "Project.0002": {
+      "id": "Project.0002",
+      "isFeature": false,
+      "description": "Project\u0027s target framework(s) needs to be changed to the new target framework that you selected for this upgrade.\n\nDuring upgrade target framework will be adjusted to corresponding platform when applicable. In some cases project would result in multiple target frameworks after the upgrade if it was using features that now have their own platforms in modern .NET frameworks (windows, iOS, Android etc).",
+      "label": "Project\u0027s target framework(s) needs to be changed",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Overview of porting from .NET Framework to .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": ".NET project SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "NuGet.0002": {
+      "id": "NuGet.0002",
+      "isFeature": false,
+      "description": "NuGet package upgrade is recommended for selected target framework.\n\nStandard .NET packages are recommended to have versions matching version of .NET that project targets.\n\nSome other packages also are known to work better for selected target frameworks.",
+      "label": "NuGet package upgrade is recommended",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262530",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0001": {
+      "id": "Api.0001",
+      "isFeature": false,
+      "description": "API is binary incompatible for selected .NET version: affects existing binaries, often requiring recompilation, because the API has changed in a way that prevents older binaries from loading or executing.",
+      "label": "Binary incompatible for selected .NET version",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Breaking changes in .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262679",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0003": {
+      "id": "Api.0003",
+      "isFeature": false,
+      "description": "API has a behavioral change in selected .NET version: code and binaries may behave differently at runtime without needing recompilation, but the new behavior might be undesirable and require updates.",
+      "label": "Behavioral change in selected .NET version",
+      "severity": "Potential",
+      "effort": 1
+    },
+    "Wpf": {
+      "id": "Wpf",
+      "isFeature": false,
+      "description": "WPF APIs for building Windows desktop applications with XAML-based UI that are available in .NET on Windows. WPF provides rich desktop UI capabilities with data binding and styling. Enable Windows Desktop support: Option 1 (Recommended): Target net9.0-windows; Option 2: Add \u003CUseWindowsDesktop\u003Etrue\u003C/UseWindowsDesktop\u003E.",
+      "label": "WPF (Windows Presentation Foundation)",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "WPF on .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2342008",
+          "isCustom": false
+        }
+      ]
+    },
+    "NuGet.0005": {
+      "id": "NuGet.0005",
+      "isFeature": false,
+      "description": "NuGet package is deprecated.\n\nGo to its documentation and if there is a guidance for replacement of functionality provided by this package.",
+      "label": "NuGet package is deprecated",
+      "severity": "Optional",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262531",
+          "isCustom": false
+        }
+      ]
+    }
+  }
+}
