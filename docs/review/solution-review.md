@@ -135,6 +135,8 @@ Combined with [K-1](#k-1), the binary loop searches `BinarySearch`'s array for v
 ---
 
 ### <a id="g-2"></a>G-2 🟠 [Approval] — Cross-thread mutation of UI-bound state
+> **✅ Applied** (branch `gui-async-threading-fixes`, PR into `main`): simulation loops moved to `Task.Run`; progress now flows through an `IProgress<double>` created on the UI thread, and `ProgressBarVisibility`/`ProgressBarValue` are toggled/reset on the UI thread in `SimulateAsync`'s `try/finally`. No UI-bound property is mutated off-thread. See [§7](#7).
+
 **File:** `ViewModels/MainViewModel.cs`
 
 `SimulateLinearSearchAsync` / `SimulateBinarySearchAsync` run on a background thread via `Task.Factory.StartNew`, yet set UI-bound properties from inside the loop:
@@ -151,6 +153,8 @@ WPF binding updates from a non-UI thread are not guaranteed safe and can throw o
 ---
 
 ### <a id="g-3"></a>G-3 🟠 [Approval] — `async void Simulate()`
+> **✅ Applied** (branch `gui-async-threading-fixes`, PR into `main`): `Simulate` is now `async Task SimulateAsync(CancellationToken)` driven by an `AsyncRelayCommand`, so faults are observable instead of tearing down the app. See [§7](#7).
+
 **File:** `ViewModels/MainViewModel.cs`
 
 ```csharp
@@ -173,6 +177,8 @@ The container registers `DataParameters`, `IDataGenerator`, `LinearSearch`, `Bin
 ---
 
 ### <a id="g-5"></a>G-5 🟠 [Approval] — Cancel command does nothing
+> **✅ Applied** (branch `gui-async-threading-fixes`, PR into `main`): `Cancel()` now calls `SimulateCommand.Cancel()`; the token is checked each loop iteration via `ThrowIfCancellationRequested()`, and `OperationCanceledException` is handled gracefully. See [§7](#7).
+
 **File:** `ViewModels/MainViewModel.cs`
 
 ```csharp
@@ -326,3 +332,40 @@ Pick one:
 - **C — Custom:** Tell me which [Approval] items to include; I'll fold them into the worklist.
 
 Whichever you choose, changes go on a new branch `refactor/solution-review` and ship as a PR into `main`.
+
+---
+
+## <a id="7"></a>7. Change log & status
+
+A running record of which findings have been actioned, in which PR, and what remains.
+
+### Completed
+
+| PR / branch | Findings addressed | Notes |
+|---|---|---|
+| **#2** `refactor/solution-review` *(merged)* | §4 [Safe] worklist (K-4, K-6, K-3 reformat, G-8, G-9, G-10, T-2, T-3) **+** T-1 **+** K-1/G-1 | Decision **B**. Shared-data bug fixed; real binary-search tests added (50 → 56 tests). |
+| **`gui-async-threading-fixes`** *(this PR)* | **G-3** (`async void` → `AsyncRelayCommand`/`Task`), **G-2** (cross-thread UI → `Task.Run` + `IProgress<T>`, UI-thread reset), **G-5** (no-op Cancel → real `CancellationToken` cancellation) | Decision **A** for this batch. Behavior changes, build-verified (0 warnings). See "Testing decision" below. |
+
+### Testing decision for `gui-async-threading-fixes` (Option A)
+
+Automated VM-level tests were **deliberately deferred** for this PR. Rationale:
+- The test project is `net10.0` and references **Kernel only**; `MainViewModel` lives in the GUI project (`net10.0-windows`, depends on WPF `Visibility`).
+- Meaningful tests would require re-targeting the test project to `net10.0-windows`, adding a GUI `ProjectReference`, **and** a DI/seam refactor of `MainViewModel` (it self-constructs `DataGenerator`/searches and references `Visibility` directly).
+- The highest-value fix — **G-2 UI-thread marshaling** — cannot be meaningfully unit-tested headlessly: `Progress<T>` marshaling needs a real UI `SynchronizationContext`, which xUnit does not provide.
+- The Kernel search loops the simulation drives are already covered by the existing **56 tests**.
+
+**Manual verification checklist** (until automated coverage lands): run the app → start **Simulate** with a large entry/search count → click **Cancel** mid-run → expect: UI stays responsive, progress bar resets to 0/hidden, no crash, **Simulate** re-enables, results from the cancelled run are not shown.
+
+### Future work (deferred — not yet scheduled)
+
+- **[Test infra — Option B]** Extract the cancellation-aware iteration logic into a Kernel-side (or plain, `net10.0`-referenceable) helper and unit-test the **G-5 cancellation contract** (token honored, `OperationCanceledException` thrown) without WPF. Moderate effort; gives real automated coverage of the cancellation loop.
+- **[Test infra — Option C]** Full VM testability: re-target the test project to `net10.0-windows`, add a GUI `ProjectReference`, refactor `MainViewModel` for constructor injection (pairs naturally with **G-4**), and add a UI-`SynchronizationContext` test fixture to exercise dispatcher marshaling. Largest effort; broadest coverage.
+
+### Remaining [Approval] items (not yet actioned)
+
+- **G-4** — use (or remove) the DI container. *(Pairs well with Option C above.)*
+- **G-6** — enforce the declared product-range validation rule.
+- **G-7** — fix `HasErrors` swallowing exceptions and returning `true`.
+- **K-2** — make `NoOfEntries` consistent with `Data` (read-only / private setter).
+- **K-3 (values)** — only if `100_00` / grouping were genuine typos (reformatting already applied; values intentionally preserved per the PR #2 decision).
+- **K-5** — move `NextRandomNo` off the search type onto the generator.
