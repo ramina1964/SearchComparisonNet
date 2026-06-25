@@ -1,13 +1,10 @@
 ﻿namespace SearchComparisonNet.Kernel.Models;
 
-//Todo: Both LinearSearch and BinarySerch must be run for TargetValue 0 after each simulation as well as updating the TargetValue textbox with the result.
 public sealed class LinearSearch : SearchBase
 {
-    public LinearSearch(IDataGenerator dataGen) : base(dataGen)
-    {
-        NoOfEntries = dataGen.NoOfEntries;
-        Data = dataGen.GenerateData();
-    }
+    // Shares the single dataset captured by SearchBase (dataGen.Data), so LinearSearch and
+    // BinarySearch operate on identical data — a prerequisite for a meaningful comparison.
+    public LinearSearch(IDataGenerator dataGen) : base(dataGen) { }
 
     // Remember: The array is sorted ascendingly
     public override ISearchItem FindItem(int value)

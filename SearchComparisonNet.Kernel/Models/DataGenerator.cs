@@ -31,9 +31,7 @@ public class DataGenerator : IDataGenerator
         while (data.Count < NoOfEntries)
         { data.Add(Random.Next(MinValue, MaxValue)); }
 
-        var result = data.ToList();
-        result.Sort();
-        return new ObservableCollection<int>(result);
+        return new ObservableCollection<int>(data.Order());
     }
     #endregion IDataGenerator
 }
