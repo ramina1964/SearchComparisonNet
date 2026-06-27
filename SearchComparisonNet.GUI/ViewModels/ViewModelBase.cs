@@ -12,19 +12,7 @@ public class ViewModelBase : ObservableObject, INotifyDataErrorInfo
         return errors ?? Enumerable.Empty<string>();
     }
 
-    public bool HasErrors
-    {
-        get
-        {
-            try
-            {
-                var propErrorsCount = PropErrors.Values.FirstOrDefault(r => r.Count > 0);
-                return propErrorsCount != null;
-            }
-            catch { }
-            return true;
-        }
-    }
+    public bool HasErrors => PropErrors.Values.Any(errors => errors.Count > 0);
 
     public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
     #endregion INotifyDataErrorInfo
