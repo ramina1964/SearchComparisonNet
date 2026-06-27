@@ -13,12 +13,7 @@ public partial class App
 
     private static void ConfigureServices(IServiceCollection services)
     {
-        _ = services.AddSingleton<DataParameters>();
-        _ = services.AddSingleton<IDataGenerator, DataGenerator>();
-        _ = services.AddSingleton<LinearSearch>();
-        _ = services.AddSingleton<BinarySearch>();
-        _ = services.AddSingleton<MainViewModel>();
-        _ = services.AddSingleton<MainView>();
+        _ = services.AddSearchComparisonServices();
     }
 
     private void OnStartup(object sender, StartupEventArgs e)

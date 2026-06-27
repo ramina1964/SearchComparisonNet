@@ -1,6 +1,6 @@
 ﻿namespace SearchComparisonNet.Kernel.Models;
 
-public abstract class SearchBase(IDataGenerator dataGen)
+public abstract class SearchBase(IDataGenerator dataGen) : ISearch
 {
     public int NoOfEntries { get; set; } = dataGen.NoOfEntries;
 

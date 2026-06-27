@@ -2,8 +2,12 @@
 
 public class MainViewModel : ViewModelBase
 {
-    public MainViewModel()
+    private readonly ISearchComparisonFactory _searchComparisonFactory;
+
+    public MainViewModel(ISearchComparisonFactory searchComparisonFactory)
     {
+        _searchComparisonFactory = searchComparisonFactory;
+
         SimulateCommand = new AsyncRelayCommand(SimulateAsync, CanSimulate);
         // AsyncRelayCommand exposes cancellation as a Cancel() method (not a command in this
         // toolkit version), so Cancel just forwards to it. CanCancel keeps the button enabled
@@ -197,11 +201,9 @@ public class MainViewModel : ViewModelBase
         TargetValue = null;
         TargetIndex = null;
 
-        var dataParams = new DataParameters(NoOfEntries);
-        var dataGen = new DataGenerator(dataParams);
-
-        LinearSearch = new LinearSearch(dataGen);
-        BinarySearch = new BinarySearch(dataGen);
+        var searchComparison = _searchComparisonFactory.Create(NoOfEntries);
+        LinearSearch = searchComparison.LinearSearch;
+        BinarySearch = searchComparison.BinarySearch;
 
         IsSimulating = true;
 
@@ -298,9 +300,9 @@ public class MainViewModel : ViewModelBase
             AvgElapsedTime = totalElapsedTime / NoOfSearches
         };
 
-    private SearchBase? LinearSearch { get; set; }
+    private ISearch? LinearSearch { get; set; }
 
-    private SearchBase? BinarySearch { get; set; }
+    private ISearch? BinarySearch { get; set; }
 
     private bool IsNoOfEntriesValid
     {
