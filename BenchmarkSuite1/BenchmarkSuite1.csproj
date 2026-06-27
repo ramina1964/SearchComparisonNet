@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net10.0</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <!-- This generated benchmark tooling project keeps its own pinned package versions,
+         so opt it out of the repo's central package management to avoid NU1008. -->
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.15.2" />
+    <PackageReference Include="Microsoft.VisualStudio.DiagnosticsHub.BenchmarkDotNetDiagnosers" Version="18.7.37220.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SearchComparisonNet.Kernel\SearchComparisonNet.Kernel.csproj" />
+  </ItemGroup>
+</Project>
