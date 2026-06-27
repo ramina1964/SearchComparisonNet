@@ -26,8 +26,6 @@ public class MainViewModel : ViewModelBase
 
     public InputValidation InputValidation { get; }
 
-    public ISearchItem SearchItem { get; set; }
-
     public bool IsSimulating
     {
         get => _isSimulating;
@@ -69,11 +67,11 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    public string ProgressBarLabel { get; set; }
+    public string ProgressBarLabel { get; set; } = string.Empty;
 
-    public ISimulationResults LinearSearchResults { get; set; }
+    public ISimulationResults? LinearSearchResults { get; set; }
 
-    public ISimulationResults BinarySearchResults { get; set; }
+    public ISimulationResults? BinarySearchResults { get; set; }
 
     public string NoOfEntriesText
     {
@@ -81,7 +79,7 @@ public class MainViewModel : ViewModelBase
         set
         {
             _ = SetProperty(ref _noOfEntriesText, value);
-            var properties = new[] { nameof(NoOfEntriesText) };
+            string[] properties = [nameof(NoOfEntriesText)];
             IsNoOfEntriesValid = InputValidation.Validate(this, context => context.IncludeProperties(properties)).IsValid;
             OnPropertyChanged(nameof(IsInputValid));
             UpdateButtonFunctionality();
@@ -104,7 +102,7 @@ public class MainViewModel : ViewModelBase
         set
         {
             _ = SetProperty(ref _noOfSearchesText, value);
-            var properties = new[] { nameof(NoOfSearchesText) };
+            string[] properties = [nameof(NoOfSearchesText)];
             IsNoOfSearchesValid = InputValidation.Validate(this, context => context.IncludeProperties(properties)).IsValid;
             OnPropertyChanged(nameof(IsInputValid));
             UpdateButtonFunctionality();
@@ -151,7 +149,7 @@ public class MainViewModel : ViewModelBase
             if (SetProperty(ref _targetValue, result))
             {
                 var searchItem = BinarySearch?.FindItem(value.Value);
-                TargetIndex = searchItem?.TargetIndex ?? null;
+                TargetIndex = searchItem?.TargetIndex;
             }
         }
     }
@@ -161,8 +159,6 @@ public class MainViewModel : ViewModelBase
         get => _targetIndex;
         set => SetProperty(ref _targetIndex, value);
     }
-
-    public string Entries { get; set; }
 
     public double BinaryAvgNoOfIterations
     {
@@ -217,14 +213,17 @@ public class MainViewModel : ViewModelBase
 
         try
         {
-            LinearSearchResults = await SimulateLinearSearchAsync(progress, token);
-            BinarySearchResults = await SimulateBinarySearchAsync(progress, token);
+            var linearResults = await SimulateLinearSearchAsync(progress, token);
+            var binaryResults = await SimulateBinarySearchAsync(progress, token);
 
-            LinearAvgNoOfIterations = LinearSearchResults.AvgNoOfIterations;
-            LinearAvgElapsedTime = LinearSearchResults.AvgElapsedTime;
+            LinearSearchResults = linearResults;
+            BinarySearchResults = binaryResults;
 
-            BinaryAvgNoOfIterations = BinarySearchResults.AvgNoOfIterations;
-            BinaryAvgElapsedTime = BinarySearchResults.AvgElapsedTime;
+            LinearAvgNoOfIterations = linearResults.AvgNoOfIterations;
+            LinearAvgElapsedTime = linearResults.AvgElapsedTime;
+
+            BinaryAvgNoOfIterations = binaryResults.AvgNoOfIterations;
+            BinaryAvgElapsedTime = binaryResults.AvgElapsedTime;
 
             IsSearchEnabled = true;
         }
@@ -246,6 +245,7 @@ public class MainViewModel : ViewModelBase
 
     private Task<ISimulationResults> SimulateLinearSearchAsync(IProgress<double> progress, CancellationToken token)
     {
+        var search = LinearSearch!;
         return Task.Run(() =>
         {
             var totalNoOfIterations = 0.0;
@@ -253,8 +253,8 @@ public class MainViewModel : ViewModelBase
             for (var j = 0; j < NoOfSearches; j++)
             {
                 token.ThrowIfCancellationRequested();
-                var value = LinearSearch.NextRandomNo();
-                var searchItem = LinearSearch.FindItem(value);
+                var value = search.NextRandomNo();
+                var searchItem = search.FindItem(value);
                 totalNoOfIterations += searchItem.NoOfIterations;
                 progress.Report((j + 1) * 100.0 / NoOfSearches);
             }
@@ -268,6 +268,7 @@ public class MainViewModel : ViewModelBase
 
     private Task<ISimulationResults> SimulateBinarySearchAsync(IProgress<double> progress, CancellationToken token)
     {
+        var search = BinarySearch!;
         return Task.Run(() =>
         {
             var totalNoOfIterations = 0.0;
@@ -275,8 +276,8 @@ public class MainViewModel : ViewModelBase
             for (var j = 0; j < NoOfSearches; j++)
             {
                 token.ThrowIfCancellationRequested();
-                var value = BinarySearch.NextRandomNo();
-                var searchItem = BinarySearch.FindItem(value);
+                var value = search.NextRandomNo();
+                var searchItem = search.FindItem(value);
                 totalNoOfIterations += searchItem.NoOfIterations;
                 progress.Report(100.0 * (j + 1) / NoOfSearches);
             }
@@ -297,39 +298,9 @@ public class MainViewModel : ViewModelBase
             AvgElapsedTime = totalElapsedTime / NoOfSearches
         };
 
-    private string GetEntries()
-    {
-        if (NoOfEntries <= 32)
-        {
-            return GetSubString(0, NoOfEntries - 1).ToString();
-        }
+    private SearchBase? LinearSearch { get; set; }
 
-        const string subEtc = " ..., ";
-        var mid = NoOfEntries / 2;
-
-        var startStr = GetSubString(0, 4);
-        var midStr = GetSubString(mid, mid + 2);
-        var endStr = GetSubString(NoOfEntries - 2, NoOfEntries - 1);
-
-        return startStr.Append(subEtc).Append(midStr).Append(subEtc).Append(endStr).ToString();
-    }
-
-    private StringBuilder GetSubString(int fromIndex, int toIndex)
-    {
-        var sb = new StringBuilder();
-        for (var i = fromIndex; i < toIndex; i++)
-        {
-            sb.Append(BinarySearch[i] + ", ");
-        }
-
-        return (toIndex == NoOfEntries - 1)
-            ? sb.Append(BinarySearch[toIndex])
-            : sb.Append(BinarySearch[toIndex] + ", ");
-    }
-
-    private SearchBase LinearSearch { get; set; }
-
-    private SearchBase BinarySearch { get; set; }
+    private SearchBase? BinarySearch { get; set; }
 
     private bool IsNoOfEntriesValid
     {
@@ -347,8 +318,8 @@ public class MainViewModel : ViewModelBase
 
     /***************************************** Private Fields ******************************************/
     private int? _targetValue;
-    private string _noOfEntriesText;
-    private string _noOfSearchesText;
+    private string _noOfEntriesText = string.Empty;
+    private string _noOfSearchesText = string.Empty;
     private int _noOfEntries;
     private int _noOfSearches;
     private bool _isSimulating;

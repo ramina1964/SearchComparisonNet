@@ -1,11 +1,9 @@
 ﻿namespace SearchComparisonNet.Kernel.Models;
 
-public sealed class LinearSearch : SearchBase
+// Shares the single dataset captured by SearchBase (dataGen.Data), so LinearSearch and
+// BinarySearch operate on identical data — a prerequisite for a meaningful comparison.
+public sealed class LinearSearch(IDataGenerator dataGen) : SearchBase(dataGen)
 {
-    // Shares the single dataset captured by SearchBase (dataGen.Data), so LinearSearch and
-    // BinarySearch operate on identical data — a prerequisite for a meaningful comparison.
-    public LinearSearch(IDataGenerator dataGen) : base(dataGen) { }
-
     // Remember: The array is sorted ascendingly
     public override ISearchItem FindItem(int value)
     {
