@@ -1,13 +1,8 @@
 ﻿namespace SearchComparisonNet.Kernel.Models;
 
-public class DataParameters
+public class DataParameters(int noOfEntries)
 {
-    public DataParameters(int noOfEntries)
-    {
-        NoOfEntries = noOfEntries;
-    }
-
-    public int NoOfEntries { get; set; }
+    public int NoOfEntries { get; set; } = noOfEntries;
 
     public int MinEntryValue => ProblemConstants.MinEntryValue;
 

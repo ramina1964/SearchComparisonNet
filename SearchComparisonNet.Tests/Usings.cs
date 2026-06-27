@@ -1,2 +1,2 @@
-﻿global using Xunit;
-global using SearchComparisonNet.Kernel.Models;
+﻿global using SearchComparisonNet.Kernel.Models;
+global using Xunit;

@@ -1,6 +1,4 @@
-﻿using SearchComparisonNet.Kernel.Interfaces;
-
-namespace SearchComparisonNet.Kernel.Models;
+﻿namespace SearchComparisonNet.Kernel.Models;
 
 public class SearchItem : ISearchItem
 {

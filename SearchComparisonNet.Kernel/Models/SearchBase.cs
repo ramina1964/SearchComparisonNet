@@ -1,17 +1,10 @@
 ﻿namespace SearchComparisonNet.Kernel.Models;
 
-public abstract class SearchBase
+public abstract class SearchBase(IDataGenerator dataGen)
 {
-    protected SearchBase(IDataGenerator dataGen)
-    {
-        NoOfEntries = dataGen.NoOfEntries;
-        NextRandomNo = dataGen.NextRandomNo;
-        Data = dataGen.Data;
-    }
+    public int NoOfEntries { get; set; } = dataGen.NoOfEntries;
 
-    public int NoOfEntries { get; set; }
-
-    public Func<int> NextRandomNo { get; }
+    public Func<int> NextRandomNo { get; } = dataGen.NextRandomNo;
 
     public int this[int index]
     {
@@ -29,5 +22,5 @@ public abstract class SearchBase
 
     public abstract ISearchItem FindItem(int value);
 
-    protected ObservableCollection<int> Data;
+    protected ObservableCollection<int> Data = dataGen.Data;
 }

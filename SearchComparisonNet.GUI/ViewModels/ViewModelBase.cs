@@ -3,13 +3,13 @@
 public class ViewModelBase : ObservableObject, INotifyDataErrorInfo
 {
     #region INotifyDataErrorInfo
-    public IEnumerable GetErrors(string propertyName)
+    public IEnumerable GetErrors(string? propertyName)
     {
         if (propertyName == null)
-            return null;
+            return Enumerable.Empty<string>();
 
-        PropErrors.TryGetValue(propertyName, out List<string> errors);
-        return errors;
+        PropErrors.TryGetValue(propertyName, out List<string>? errors);
+        return errors ?? Enumerable.Empty<string>();
     }
 
     public bool HasErrors
@@ -26,7 +26,7 @@ public class ViewModelBase : ObservableObject, INotifyDataErrorInfo
         }
     }
 
-    public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+    public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
     #endregion INotifyDataErrorInfo
 
     protected void OnPropertyErrorsChanged(string p) => ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(p));

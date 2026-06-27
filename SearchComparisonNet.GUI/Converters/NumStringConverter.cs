@@ -1,12 +1,11 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Data;
 
 namespace SearchComparisonNet.GUI.Converters;
 
 public class NumStringConverter : IValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value == null)
         { return null; }
@@ -42,7 +41,7 @@ public class NumStringConverter : IValueConverter
         return value.ToString();
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         var valueStr = value as string;
         if (int.TryParse(valueStr, out var resInt))

@@ -1,19 +1,14 @@
-﻿using System;
-using System.Globalization;
-using System.Windows.Data;
-using System.Windows.Markup;
-
-namespace SearchComparisonNet.GUI.Converters;
+﻿namespace SearchComparisonNet.GUI.Converters;
 
 public class NegativeConverter : MarkupExtension, IValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         => ReturnNegative(value);
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         => ReturnNegative(value);
 
-    private static object ReturnNegative(object value) => value switch
+    private static object ReturnNegative(object? value) => value switch
     {
         bool b => !b,
         byte n => -1 * n,
@@ -30,5 +25,5 @@ public class NegativeConverter : MarkupExtension, IValueConverter
     public override object ProvideValue(IServiceProvider serviceProvider)
         => _converter ??= new NegativeConverter();
 
-    private static NegativeConverter _converter;
+    private static NegativeConverter? _converter;
 }

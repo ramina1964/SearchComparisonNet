@@ -1,11 +1,7 @@
-﻿using SearchComparisonNet.Kernel.Interfaces;
+﻿namespace SearchComparisonNet.Kernel.Models;
 
-namespace SearchComparisonNet.Kernel.Models;
-
-public sealed class BinarySearch : SearchBase
+public sealed class BinarySearch(IDataGenerator dataGen) : SearchBase(dataGen)
 {
-    public BinarySearch(IDataGenerator dataGen) : base(dataGen) { }
-
     public override ISearchItem FindItem(int value)
     {
         const int noOfIterations = 0;
