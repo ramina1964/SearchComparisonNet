@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net10.0</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <!-- This generated benchmark tooling project keeps its own pinned package versions,
          so opt it out of the repo's central package management to avoid NU1008. -->
