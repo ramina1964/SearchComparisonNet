@@ -3,13 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:converters="clr-namespace:SearchComparisonNet.GUI.Converters"
              mc:Ignorable="d">
-
-    <UserControl.Resources>
-        <converters:NumStringConverter x:Key="NumStringConverter" />
-        <converters:NegativeConverter x:Key="NegativeConverter" />
-    </UserControl.Resources>
 
     <!-- Input Panel -->
     <Grid>
@@ -34,9 +28,7 @@
         <TextBox Grid.Row ="1" Grid.Column="1" Style="{StaticResource TextErrorStyle}" Width="55" HorizontalAlignment="Right" 
                  Text="{Binding NoOfEntriesText, Mode=TwoWay, UpdateSourceTrigger=LostFocus,
                  ValidatesOnNotifyDataErrors=True, Converter={StaticResource NumStringConverter}}"
-                 IsEnabled="{Binding IsSimulating, Mode=TwoWay, UpdateSourceTrigger=LostFocus,
-                 ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=True,
-                 Converter={StaticResource NegativeConverter}}"/>
+                 IsEnabled="{Binding IsSimulating, Converter={StaticResource NegativeConverter}}"/>
 
         <Label Grid.Row ="2" Grid.Column="0" Style="{StaticResource LabelStyle}" Width="93"
                HorizontalAlignment="Left" HorizontalContentAlignment="Left" Content="No. of Searches" />
@@ -44,7 +36,6 @@
         <TextBox Grid.Row ="2" Grid.Column="1" Style="{StaticResource TextErrorStyle}" Width="55" HorizontalAlignment="Right" 
                  Text="{Binding NoOfSearchesText, Mode=TwoWay, UpdateSourceTrigger=LostFocus,
                  ValidatesOnNotifyDataErrors=True, Converter={StaticResource NumStringConverter}}"
-                 IsEnabled="{Binding IsSimulating, Mode=TwoWay, UpdateSourceTrigger=LostFocus,
-                 ValidatesOnNotifyDataErrors=True, Converter={StaticResource NegativeConverter}}" />
+                 IsEnabled="{Binding IsSimulating, Converter={StaticResource NegativeConverter}}" />
     </Grid>
 </UserControl>

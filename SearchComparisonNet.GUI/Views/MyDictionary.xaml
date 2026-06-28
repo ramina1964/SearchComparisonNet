@@ -1,5 +1,10 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" >
+﻿
+    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:SearchComparisonNet.GUI.Converters" >
+
+    <converters:NumStringConverter x:Key="NumStringConverter" />
+    <converters:NegativeConverter x:Key="NegativeConverter" />
 
     <Style x:Key="ButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="#95E3E2" />
