@@ -4,6 +4,10 @@ public class MainViewModel : ViewModelBase
 {
     private readonly ISearchComparisonFactory _searchComparisonFactory;
 
+    // Minimum wall-clock interval between progress reports. Report(...) marshals to the UI thread,
+    // so this bounds progress-bar updates to ~5 per second regardless of NoOfSearches.
+    private const int ProgressReportIntervalMs = 200;
+
     public MainViewModel(ISearchComparisonFactory searchComparisonFactory)
     {
         _searchComparisonFactory = searchComparisonFactory;
@@ -252,13 +256,23 @@ public class MainViewModel : ViewModelBase
         {
             var totalNoOfIterations = 0.0;
             var stopwatch = Stopwatch.StartNew();
+            var lastReportMs = -1L;
             for (var j = 0; j < NoOfSearches; j++)
             {
                 token.ThrowIfCancellationRequested();
                 var value = search.NextRandomNo();
                 var searchItem = search.FindItem(value);
                 totalNoOfIterations += searchItem.NoOfIterations;
-                progress.Report((j + 1) * 100.0 / NoOfSearches);
+                // Throttle progress by elapsed time: Report(...) marshals to the UI thread, so
+                // updating every iteration floods the dispatcher. Reporting at most once per
+                // ProgressReportIntervalMs keeps UI updates bounded and adapts to the run length;
+                // the final iteration always reports so the bar reaches 100%.
+                var elapsedMs = stopwatch.ElapsedMilliseconds;
+                if (j == NoOfSearches - 1 || elapsedMs - lastReportMs >= ProgressReportIntervalMs)
+                {
+                    lastReportMs = elapsedMs;
+                    progress.Report((j + 1) * 100.0 / NoOfSearches);
+                }
             }
             stopwatch.Stop();
             var timeInSec = (double)stopwatch.ElapsedMilliseconds / 1000;
@@ -275,13 +289,22 @@ public class MainViewModel : ViewModelBase
         {
             var totalNoOfIterations = 0.0;
             var stopwatch = Stopwatch.StartNew();
+            var lastReportMs = -1L;
             for (var j = 0; j < NoOfSearches; j++)
             {
                 token.ThrowIfCancellationRequested();
                 var value = search.NextRandomNo();
                 var searchItem = search.FindItem(value);
                 totalNoOfIterations += searchItem.NoOfIterations;
-                progress.Report(100.0 * (j + 1) / NoOfSearches);
+                // Throttle progress by elapsed time (see SimulateLinearSearchAsync): at most one
+                // UI-thread Report(...) per ProgressReportIntervalMs, plus a final report so the
+                // bar reaches 100%.
+                var elapsedMs = stopwatch.ElapsedMilliseconds;
+                if (j == NoOfSearches - 1 || elapsedMs - lastReportMs >= ProgressReportIntervalMs)
+                {
+                    lastReportMs = elapsedMs;
+                    progress.Report((j + 1) * 100.0 / NoOfSearches);
+                }
             }
             stopwatch.Stop();
             var timeInSec = (double)stopwatch.ElapsedMilliseconds / 1000;

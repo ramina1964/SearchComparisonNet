@@ -1,14 +1,16 @@
 using BenchmarkDotNet.Attributes;
 using SearchComparisonNet.Kernel.Models;
 using Microsoft.VSDiagnostics;
+using System.Diagnostics;
 
 namespace SearchComparisonNet.Benchmarks;
 // Hypothesis under test: in the real GUI flow (MainViewModel.SimulateLinearSearchAsync), the
 // inner search loop calls IProgress<double>.Report(...) on EVERY iteration. This benchmark
-// isolates that reporting overhead by running the identical, deterministic search loop three ways:
+// isolates that reporting overhead by running the identical, deterministic search loop four ways:
 //   * NoReporting          - baseline: search loop only, no progress callbacks.
-//   * ReportEveryIteration - mirrors current production: Report(...) once per query.
-//   * ReportThrottled      - candidate fix: Report(...) only when the integer percent changes.
+//   * ReportEveryIteration - original production: Report(...) once per query.
+//   * ReportThrottled      - Report(...) only when the integer percent changes (<=100 calls).
+//   * ReportTimeThrottled  - production fix: Report(...) at most once per 200 ms (time-based).
 // All variants iterate the same prepared _queries array, so the timing delta isolates the cost
 // of progress reporting and how throttling its frequency affects the search loop.
 [SimpleJob(warmupCount: 3, iterationCount: 5)]
@@ -74,6 +76,27 @@ public class ProgressReportingBenchmarks
             {
                 lastPercent = percent;
                 _progress.Report(percent);
+            }
+        }
+
+        return iterations;
+    }
+
+    [Benchmark]
+    public long ReportTimeThrottled()
+    {
+        long iterations = 0;
+        var stopwatch = Stopwatch.StartNew();
+        var lastReportMs = -1L;
+        const int minReportIntervalMs = 200;
+        for (var i = 0; i < _queries.Length; i++)
+        {
+            iterations += _linear.FindItem(_queries[i]).NoOfIterations;
+            var elapsedMs = stopwatch.ElapsedMilliseconds;
+            if (i == _queries.Length - 1 || elapsedMs - lastReportMs >= minReportIntervalMs)
+            {
+                lastReportMs = elapsedMs;
+                _progress.Report((i + 1) * 100.0 / _queries.Length);
             }
         }
 
