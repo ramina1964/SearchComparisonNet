@@ -6,7 +6,7 @@ public class MainViewModel : ViewModelBase
 
     // Minimum wall-clock interval between progress reports. Report(...) marshals to the UI thread,
     // so this bounds progress-bar updates to ~5 per second regardless of NoOfSearches.
-    private const int ProgressReportIntervalMs = 200;
+    private const int ProgressReportIntervalMs = ProgressReportPolicy.DefaultIntervalMs;
 
     public MainViewModel(ISearchComparisonFactory searchComparisonFactory)
     {
@@ -268,7 +268,7 @@ public class MainViewModel : ViewModelBase
                 // ProgressReportIntervalMs keeps UI updates bounded and adapts to the run length;
                 // the final iteration always reports so the bar reaches 100%.
                 var elapsedMs = stopwatch.ElapsedMilliseconds;
-                if (j == NoOfSearches - 1 || elapsedMs - lastReportMs >= ProgressReportIntervalMs)
+                if (ProgressReportPolicy.ShouldReport(j, NoOfSearches, elapsedMs, lastReportMs, ProgressReportIntervalMs))
                 {
                     lastReportMs = elapsedMs;
                     progress.Report((j + 1) * 100.0 / NoOfSearches);
@@ -300,7 +300,7 @@ public class MainViewModel : ViewModelBase
                 // UI-thread Report(...) per ProgressReportIntervalMs, plus a final report so the
                 // bar reaches 100%.
                 var elapsedMs = stopwatch.ElapsedMilliseconds;
-                if (j == NoOfSearches - 1 || elapsedMs - lastReportMs >= ProgressReportIntervalMs)
+                if (ProgressReportPolicy.ShouldReport(j, NoOfSearches, elapsedMs, lastReportMs, ProgressReportIntervalMs))
                 {
                     lastReportMs = elapsedMs;
                     progress.Report((j + 1) * 100.0 / NoOfSearches);
