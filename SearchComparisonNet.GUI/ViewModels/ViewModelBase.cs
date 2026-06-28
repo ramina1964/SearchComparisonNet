@@ -2,22 +2,12 @@
 
 public class ViewModelBase : ObservableObject, INotifyDataErrorInfo
 {
-    #region INotifyDataErrorInfo
-    public IEnumerable GetErrors(string? propertyName)
-    {
-        if (propertyName == null)
-            return Enumerable.Empty<string>();
+    // INotifyDataErrorInfo is required because the views bind with ValidatesOnNotifyDataErrors=True.
+    // Input is validated via FluentValidation in the view model rather than per-property error
+    // collections, so there are never any errors to surface here.
+    public IEnumerable GetErrors(string? propertyName) => Enumerable.Empty<string>();
 
-        PropErrors.TryGetValue(propertyName, out List<string>? errors);
-        return errors ?? Enumerable.Empty<string>();
-    }
-
-    public bool HasErrors => PropErrors.Values.Any(errors => errors.Count > 0);
+    public bool HasErrors => false;
 
     public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
-    #endregion INotifyDataErrorInfo
-
-    protected void OnPropertyErrorsChanged(string p) => ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(p));
-
-    protected readonly Dictionary<string, List<string>> PropErrors = [];
 }

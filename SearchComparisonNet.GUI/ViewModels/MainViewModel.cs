@@ -26,12 +26,6 @@ public partial class MainViewModel : ViewModelBase
 
     public string ProgressBarLabel { get; private set; } = string.Empty;
 
-    public ISimulationResults? LinearSearchResults { get; set; }
-
-    public ISimulationResults? BinarySearchResults { get; set; }
-
-    // The generated SimulateCommand is an IAsyncRelayCommand; CancelCommand forwards to its
-    // Cancel() because this toolkit version exposes cancellation as a method, not a command.
     [ObservableProperty]
     private bool _isSearchEnabled;
 
@@ -82,40 +76,29 @@ public partial class MainViewModel : ViewModelBase
         OnPropertyChanged(nameof(ProgressBarLabel));
     }
 
-    partial void OnNoOfEntriesTextChanged(string value)
+    partial void OnNoOfEntriesTextChanged(string value) =>
+        IsNoOfEntriesValid = ValidateAndParse(value, nameof(NoOfEntriesText), parsed => NoOfEntries = parsed);
+
+    partial void OnNoOfSearchesTextChanged(string value) =>
+        IsNoOfSearchesValid = ValidateAndParse(value, nameof(NoOfSearchesText), parsed => NoOfSearches = parsed);
+
+    // Validates a single text property, refreshes command/button state, and on success parses the
+    // value into the matching integer property. Returns whether the text property is valid.
+    private bool ValidateAndParse(string value, string propertyName, Action<int> setParsedValue)
     {
-        string[] properties = [nameof(NoOfEntriesText)];
-        IsNoOfEntriesValid = InputValidation.Validate(this, context => context.IncludeProperties(properties)).IsValid;
+        var isValid = InputValidation.Validate(this, context => context.IncludeProperties(propertyName)).IsValid;
         OnPropertyChanged(nameof(IsInputValid));
         UpdateButtonFunctionality();
 
-        if (!IsNoOfEntriesValid)
+        if (!isValid)
         {
             IsSimulating = false;
-            return;
+            return false;
         }
 
-        // Here: IsNoOfEntriesValid == true;
-        _ = int.TryParse(value, out int noOfEntries);
-        NoOfEntries = noOfEntries;
-    }
-
-    partial void OnNoOfSearchesTextChanged(string value)
-    {
-        string[] properties = [nameof(NoOfSearchesText)];
-        IsNoOfSearchesValid = InputValidation.Validate(this, context => context.IncludeProperties(properties)).IsValid;
-        OnPropertyChanged(nameof(IsInputValid));
-        UpdateButtonFunctionality();
-
-        if (!IsNoOfSearchesValid)
-        {
-            IsSimulating = false;
-            return;
-        }
-
-        // Here: IsNoOfSearchesValid == true;
-        _ = int.TryParse(value, out int noOfSearches);
-        NoOfSearches = noOfSearches;
+        _ = int.TryParse(value, out var parsed);
+        setParsedValue(parsed);
+        return true;
     }
 
     partial void OnTargetValueChanged(int? value)
@@ -138,6 +121,8 @@ public partial class MainViewModel : ViewModelBase
 
     private bool CanCancel() => IsSimulating;
 
+    // The generated SimulateCommand is an IAsyncRelayCommand; Cancel forwards to its Cancel()
+    // because this toolkit version exposes cancellation as a method, not a separate command.
     [RelayCommand(CanExecute = nameof(CanCancel))]
     private void Cancel() => SimulateCommand.Cancel();
 
@@ -166,9 +151,6 @@ public partial class MainViewModel : ViewModelBase
             // rounded for display (1 vs 5 fractional digits); the loop itself is identical.
             var linearResults = await RunSimulationAsync(LinearSearch!, roundDigits: 1, progress, token);
             var binaryResults = await RunSimulationAsync(BinarySearch!, roundDigits: 5, progress, token);
-
-            LinearSearchResults = linearResults;
-            BinarySearchResults = binaryResults;
 
             LinearAvgNoOfIterations = linearResults.AvgNoOfIterations;
             LinearAvgElapsedTime = linearResults.AvgElapsedTime;
