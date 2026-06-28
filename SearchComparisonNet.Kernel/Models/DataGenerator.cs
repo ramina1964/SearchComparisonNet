@@ -26,12 +26,13 @@ public class DataGenerator : IDataGenerator
 
     public int[] GenerateData()
     {
-        var data = new HashSet<int>();
+        var data = new HashSet<int>(NoOfEntries);
 
         while (data.Count < NoOfEntries)
         { data.Add(Random.Next(MinValue, MaxValue)); }
 
-        var sorted = data.ToArray();
+        var sorted = new int[NoOfEntries];
+        data.CopyTo(sorted);
         Array.Sort(sorted);
         return sorted;
     }
