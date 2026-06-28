@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using BenchmarkDotNet.Attributes;
 using SearchComparisonNet.Kernel.Models;
 using Microsoft.VSDiagnostics;
@@ -22,5 +21,5 @@ public class DataGenerationBenchmarks
     }
 
     [Benchmark]
-    public ObservableCollection<int> GenerateData() => _generator.GenerateData();
+    public int[] GenerateData() => _generator.GenerateData();
 }

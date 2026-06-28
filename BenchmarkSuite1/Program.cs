@@ -10,7 +10,9 @@ namespace BenchmarkSuite1
     {
         static void Main(string[] args)
         {
-            var _ = BenchmarkRunner.Run(typeof(Program).Assembly);
+            // Assembly-wide discovery via BenchmarkSwitcher so the run_benchmark tooling can pass
+            // --filter args to select specific benchmarks; still discovers every [Benchmark] type.
+            BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
         }
     }
 }

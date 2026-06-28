@@ -12,7 +12,7 @@ internal static class SearchWorkload
     public static (DataGenerator Generator, int[] SortedArray, int[] Queries) Build(int noOfEntries, int noOfSearches)
     {
         var dataParams = new DataParameters(noOfEntries);
-        var generator = new DataGenerator(dataParams);   // sorted ObservableCollection<int>
+        var generator = new DataGenerator(dataParams);   // sorted int[] dataset
         var sortedArray = generator.Data.ToArray();      // identical data as a raw int[]
 
         var rng = new Random(QuerySeed);

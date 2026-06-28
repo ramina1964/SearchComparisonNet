@@ -22,5 +22,5 @@ public abstract class SearchBase(IDataGenerator dataGen) : ISearch
 
     public abstract ISearchItem FindItem(int value);
 
-    protected ObservableCollection<int> Data = dataGen.Data;
+    protected int[] Data = dataGen.Data;
 }

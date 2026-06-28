@@ -10,7 +10,7 @@ public interface IDataGenerator
 
     int NextRandomNo();
 
-    public ObservableCollection<int> Data { get; }
+    public int[] Data { get; }
 
-    ObservableCollection<int> GenerateData();
+    int[] GenerateData();
 }

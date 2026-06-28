@@ -11,7 +11,7 @@ public class DataGenerator : IDataGenerator
         Data = GenerateData();
     }
 
-    public ObservableCollection<int> Data { get; }
+    public int[] Data { get; }
 
     public Random Random { get; }
 
@@ -24,14 +24,16 @@ public class DataGenerator : IDataGenerator
 
     public int NextRandomNo() => Random.Next(MinValue, MaxValue);
 
-    public ObservableCollection<int> GenerateData()
+    public int[] GenerateData()
     {
         var data = new HashSet<int>();
 
         while (data.Count < NoOfEntries)
         { data.Add(Random.Next(MinValue, MaxValue)); }
 
-        return new ObservableCollection<int>(data.Order());
+        var sorted = data.ToArray();
+        Array.Sort(sorted);
+        return sorted;
     }
     #endregion IDataGenerator
 }
