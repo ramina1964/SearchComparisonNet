@@ -26,15 +26,32 @@ public class DataGenerator : IDataGenerator
 
     public int[] GenerateData()
     {
-        var data = new HashSet<int>(NoOfEntries);
+        // Track membership in a compact bitset over the sampling domain [MinValue, MaxValue)
+        // instead of a HashSet<int>. This avoids the HashSet Entry[] LOH allocations and lets
+        // us collect the values in ascending order directly, so no separate sort is needed.
+        var domainSize = MaxValue - MinValue;
+        var seen = new BitArray(domainSize);
 
-        while (data.Count < NoOfEntries)
-        { data.Add(Random.Next(MinValue, MaxValue)); }
+        var result = new int[NoOfEntries];
+        var count = 0;
+        while (count < NoOfEntries)
+        {
+            var offset = Random.Next(MinValue, MaxValue) - MinValue;
+            if (seen[offset])
+            { continue; }
 
-        var sorted = new int[NoOfEntries];
-        data.CopyTo(sorted);
-        Array.Sort(sorted);
-        return sorted;
+            seen[offset] = true;
+            count++;
+        }
+
+        var index = 0;
+        for (var offset = 0; offset < domainSize && index < NoOfEntries; offset++)
+        {
+            if (seen[offset])
+            { result[index++] = offset + MinValue; }
+        }
+
+        return result;
     }
     #endregion IDataGenerator
 }
