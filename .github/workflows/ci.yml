@@ -21,10 +21,10 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Restore
-        run: dotnet restore SearchComparisonNet.sln
+        run: dotnet restore SearchComparisonNet.slnx
 
       - name: Build
-        run: dotnet build SearchComparisonNet.sln --configuration Release --no-restore
+        run: dotnet build SearchComparisonNet.slnx --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test SearchComparisonNet.sln --configuration Release --no-build --verbosity normal
+        run: dotnet test SearchComparisonNet.slnx --configuration Release --no-build --verbosity normal

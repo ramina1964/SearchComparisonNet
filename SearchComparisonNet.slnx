@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="BenchmarkSuite1/BenchmarkSuite1.csproj" />
+  <Project Path="SearchComparisonNet.GUI/SearchComparisonNet.GUI.csproj" />
+  <Project Path="SearchComparisonNet.Kernel/SearchComparisonNet.Kernel.csproj" />
+  <Project Path="SearchComparisonNet.Tests/SearchComparisonNet.Tests.csproj" />
+</Solution>
