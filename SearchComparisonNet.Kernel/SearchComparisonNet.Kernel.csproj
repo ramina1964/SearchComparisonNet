@@ -8,8 +8,4 @@
     <PackageReference Include="FluentValidation" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-
 </Project>
