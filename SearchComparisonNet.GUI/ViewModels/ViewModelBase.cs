@@ -19,5 +19,5 @@ public class ViewModelBase : ObservableObject, INotifyDataErrorInfo
 
     protected void OnPropertyErrorsChanged(string p) => ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(p));
 
-    protected readonly Dictionary<string, List<string>> PropErrors = new();
+    protected readonly Dictionary<string, List<string>> PropErrors = [];
 }
