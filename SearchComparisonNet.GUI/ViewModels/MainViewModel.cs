@@ -1,6 +1,6 @@
 ﻿namespace SearchComparisonNet.GUI.ViewModels;
 
-public class MainViewModel : ViewModelBase
+public partial class MainViewModel : ViewModelBase
 {
     private readonly ISearchComparisonFactory _searchComparisonFactory;
 
@@ -12,12 +12,6 @@ public class MainViewModel : ViewModelBase
     {
         _searchComparisonFactory = searchComparisonFactory;
 
-        SimulateCommand = new AsyncRelayCommand(SimulateAsync, CanSimulate);
-        // AsyncRelayCommand exposes cancellation as a Cancel() method (not a command in this
-        // toolkit version), so Cancel just forwards to it. CanCancel keeps the button enabled
-        // only while a simulation is actually running.
-        CancelCommand = new RelayCommand(Cancel, CanCancel);
-
         InputValidation = new InputValidation() { ClassLevelCascadeMode = CascadeMode.Stop };
         NoOfEntriesText = ProblemConstants.InitialNoOfEntries.ToString();
         NoOfSearchesText = ProblemConstants.InitialNoOfSearches.ToString();
@@ -28,28 +22,109 @@ public class MainViewModel : ViewModelBase
     }
 
     /************************************ Public Attributes ************************************/
-    public IAsyncRelayCommand SimulateCommand { get; }
-
-    public RelayCommand CancelCommand { get; }
-
     public InputValidation InputValidation { get; }
 
-    public bool IsSimulating
+    public string ProgressBarLabel { get; private set; } = string.Empty;
+
+    public ISimulationResults? LinearSearchResults { get; set; }
+
+    public ISimulationResults? BinarySearchResults { get; set; }
+
+    // The generated SimulateCommand is an IAsyncRelayCommand; CancelCommand forwards to its
+    // Cancel() because this toolkit version exposes cancellation as a method, not a command.
+    [ObservableProperty]
+    private bool _isSearchEnabled;
+
+    [ObservableProperty]
+    private Visibility _progressBarVisibility;
+
+    [ObservableProperty]
+    private int _noOfEntries;
+
+    [ObservableProperty]
+    private int _noOfSearches;
+
+    [ObservableProperty]
+    private int? _targetIndex;
+
+    [ObservableProperty]
+    private double _binaryAvgNoOfIterations;
+
+    [ObservableProperty]
+    private double _binaryAvgElapsedTime;
+
+    [ObservableProperty]
+    private double _linearAvgNoOfIterations;
+
+    [ObservableProperty]
+    private double _linearAvgElapsedTime;
+
+    [ObservableProperty]
+    private bool _isSimulating;
+
+    [ObservableProperty]
+    private double _progressBarValue;
+
+    [ObservableProperty]
+    private string _noOfEntriesText = string.Empty;
+
+    [ObservableProperty]
+    private string _noOfSearchesText = string.Empty;
+
+    [ObservableProperty]
+    private int? _targetValue;
+
+    partial void OnIsSimulatingChanged(bool value) => UpdateButtonFunctionality();
+
+    partial void OnProgressBarValueChanged(double value)
     {
-        get => _isSimulating;
-        set
-        {
-            if (SetProperty(ref _isSimulating, value))
-            {
-                UpdateButtonFunctionality();
-            }
-        }
+        ProgressBarLabel = Math.Round(value, 0) + "%";
+        OnPropertyChanged(nameof(ProgressBarLabel));
     }
 
-    public bool IsSearchEnabled
+    partial void OnNoOfEntriesTextChanged(string value)
     {
-        get => _isSearchEnabled;
-        set => SetProperty(ref _isSearchEnabled, value);
+        string[] properties = [nameof(NoOfEntriesText)];
+        IsNoOfEntriesValid = InputValidation.Validate(this, context => context.IncludeProperties(properties)).IsValid;
+        OnPropertyChanged(nameof(IsInputValid));
+        UpdateButtonFunctionality();
+
+        if (!IsNoOfEntriesValid)
+        {
+            IsSimulating = false;
+            return;
+        }
+
+        // Here: IsNoOfEntriesValid == true;
+        _ = int.TryParse(value, out int noOfEntries);
+        NoOfEntries = noOfEntries;
+    }
+
+    partial void OnNoOfSearchesTextChanged(string value)
+    {
+        string[] properties = [nameof(NoOfSearchesText)];
+        IsNoOfSearchesValid = InputValidation.Validate(this, context => context.IncludeProperties(properties)).IsValid;
+        OnPropertyChanged(nameof(IsInputValid));
+        UpdateButtonFunctionality();
+
+        if (!IsNoOfSearchesValid)
+        {
+            IsSimulating = false;
+            return;
+        }
+
+        // Here: IsNoOfSearchesValid == true;
+        _ = int.TryParse(value, out int noOfSearches);
+        NoOfSearches = noOfSearches;
+    }
+
+    partial void OnTargetValueChanged(int? value)
+    {
+        if (value == null)
+        { return; }
+
+        var searchItem = BinarySearch?.FindItem(value.Value);
+        TargetIndex = searchItem?.TargetIndex;
     }
 
     private void UpdateButtonFunctionality()
@@ -58,147 +133,15 @@ public class MainViewModel : ViewModelBase
         CancelCommand.NotifyCanExecuteChanged();
     }
 
-    public Visibility ProgressBarVisibility
-    {
-        get => _progressBarVisibility;
-        set => SetProperty(ref _progressBarVisibility, value);
-    }
-
-    public double ProgressBarValue
-    {
-        get => _progressBarValue;
-        set
-        {
-            _ = SetProperty(ref _progressBarValue, value);
-            ProgressBarLabel = Math.Round(value, 0) + "%";
-            OnPropertyChanged(nameof(ProgressBarLabel));
-        }
-    }
-
-    public string ProgressBarLabel { get; set; } = string.Empty;
-
-    public ISimulationResults? LinearSearchResults { get; set; }
-
-    public ISimulationResults? BinarySearchResults { get; set; }
-
-    public string NoOfEntriesText
-    {
-        get => _noOfEntriesText;
-        set
-        {
-            _ = SetProperty(ref _noOfEntriesText, value);
-            string[] properties = [nameof(NoOfEntriesText)];
-            IsNoOfEntriesValid = InputValidation.Validate(this, context => context.IncludeProperties(properties)).IsValid;
-            OnPropertyChanged(nameof(IsInputValid));
-            UpdateButtonFunctionality();
-
-            if (!IsNoOfEntriesValid)
-            {
-                IsSimulating = false;
-                return;
-            }
-
-            // Here: IsNoOfEntriesValid == true;
-            _ = int.TryParse(value, out int noOfEntries);
-            NoOfEntries = noOfEntries;
-        }
-    }
-
-    public string NoOfSearchesText
-    {
-        get => _noOfSearchesText;
-        set
-        {
-            _ = SetProperty(ref _noOfSearchesText, value);
-            string[] properties = [nameof(NoOfSearchesText)];
-            IsNoOfSearchesValid = InputValidation.Validate(this, context => context.IncludeProperties(properties)).IsValid;
-            OnPropertyChanged(nameof(IsInputValid));
-            UpdateButtonFunctionality();
-
-            if (!IsNoOfSearchesValid)
-            {
-                IsSimulating = false;
-                return;
-            }
-
-            // Here: IsNoOfSearchesValid == true;
-            _ = int.TryParse(value, out int noOfSearches);
-            NoOfSearches = noOfSearches;
-        }
-    }
-
-    public int NoOfEntries
-    {
-        get => _noOfEntries;
-        set => SetProperty(ref _noOfEntries, value);
-    }
-
-    public int NoOfSearches
-    {
-        get => _noOfSearches;
-        set => SetProperty(ref _noOfSearches, value);
-    }
-
-    public int? TargetValue
-    {
-        get => _targetValue;
-        set
-        {
-            if (value == null)
-            {
-                SetProperty(ref _targetValue, null);
-                return;
-            }
-
-            var valid = int.TryParse(value.Value.ToString(), out int result);
-            if (!valid)
-            { return; }
-
-            if (SetProperty(ref _targetValue, result))
-            {
-                var searchItem = BinarySearch?.FindItem(value.Value);
-                TargetIndex = searchItem?.TargetIndex;
-            }
-        }
-    }
-
-    public int? TargetIndex
-    {
-        get => _targetIndex;
-        set => SetProperty(ref _targetIndex, value);
-    }
-
-    public double BinaryAvgNoOfIterations
-    {
-        get => _binaryAvgNoOfIterations;
-        set => SetProperty(ref _binaryAvgNoOfIterations, value);
-    }
-
-    public double BinaryAvgElapsedTime
-    {
-        get => _binaryAvgElapsedTime;
-        set => SetProperty(ref _binaryAvgElapsedTime, value);
-    }
-
-    public double LinearAvgNoOfIterations
-    {
-        get => _linearAvgNoOfIterations;
-        set => SetProperty(ref _linearAvgNoOfIterations, value);
-    }
-
-    public double LinearAvgElapsedTime
-    {
-        get => _linearAvgElapsedTime;
-        set => SetProperty(ref _linearAvgElapsedTime, value);
-    }
-
     /***************************************** Private Methods *****************************************/
     private bool CanSimulate() => !IsSimulating && IsInputValid;
 
     private bool CanCancel() => IsSimulating;
 
+    [RelayCommand(CanExecute = nameof(CanCancel))]
     private void Cancel() => SimulateCommand.Cancel();
 
+    [RelayCommand(CanExecute = nameof(CanSimulate))]
     private async Task SimulateAsync(CancellationToken token)
     {
         IsSearchEnabled = false;
@@ -219,8 +162,10 @@ public class MainViewModel : ViewModelBase
 
         try
         {
-            var linearResults = await SimulateLinearSearchAsync(progress, token);
-            var binaryResults = await SimulateBinarySearchAsync(progress, token);
+            // Linear and binary runs differ only in how aggressively their elapsed time is
+            // rounded for display (1 vs 5 fractional digits); the loop itself is identical.
+            var linearResults = await RunSimulationAsync(LinearSearch!, roundDigits: 1, progress, token);
+            var binaryResults = await RunSimulationAsync(BinarySearch!, roundDigits: 5, progress, token);
 
             LinearSearchResults = linearResults;
             BinarySearchResults = binaryResults;
@@ -249,10 +194,8 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    private Task<ISimulationResults> SimulateLinearSearchAsync(IProgress<double> progress, CancellationToken token)
-    {
-        var search = LinearSearch!;
-        return Task.Run(() =>
+    private Task<ISimulationResults> RunSimulationAsync(ISearch search, int roundDigits, IProgress<double> progress, CancellationToken token) =>
+        Task.Run(() =>
         {
             var totalNoOfIterations = 0.0;
             var stopwatch = Stopwatch.StartNew();
@@ -277,42 +220,9 @@ public class MainViewModel : ViewModelBase
             stopwatch.Stop();
             var timeInSec = (double)stopwatch.ElapsedMilliseconds / 1000;
 
-            var elapsedTimeInSec = Math.Round(timeInSec, 1);
+            var elapsedTimeInSec = Math.Round(timeInSec, roundDigits);
             return SimulationResults(totalNoOfIterations, elapsedTimeInSec);
         }, token);
-    }
-
-    private Task<ISimulationResults> SimulateBinarySearchAsync(IProgress<double> progress, CancellationToken token)
-    {
-        var search = BinarySearch!;
-        return Task.Run(() =>
-        {
-            var totalNoOfIterations = 0.0;
-            var stopwatch = Stopwatch.StartNew();
-            var lastReportMs = -1L;
-            for (var j = 0; j < NoOfSearches; j++)
-            {
-                token.ThrowIfCancellationRequested();
-                var value = search.NextRandomNo();
-                var searchItem = search.FindItem(value);
-                totalNoOfIterations += searchItem.NoOfIterations;
-                // Throttle progress by elapsed time (see SimulateLinearSearchAsync): at most one
-                // UI-thread Report(...) per ProgressReportIntervalMs, plus a final report so the
-                // bar reaches 100%.
-                var elapsedMs = stopwatch.ElapsedMilliseconds;
-                if (ProgressReportPolicy.ShouldReport(j, NoOfSearches, elapsedMs, lastReportMs, ProgressReportIntervalMs))
-                {
-                    lastReportMs = elapsedMs;
-                    progress.Report((j + 1) * 100.0 / NoOfSearches);
-                }
-            }
-            stopwatch.Stop();
-            var timeInSec = (double)stopwatch.ElapsedMilliseconds / 1000;
-
-            var elapsedTimeInSec = Math.Round(timeInSec, 5);
-            return SimulationResults(totalNoOfIterations, elapsedTimeInSec);
-        }, token);
-    }
 
     private ISimulationResults SimulationResults(double totalNoOfIterations, double totalElapsedTime) =>
         new SimulationResults()
@@ -327,35 +237,11 @@ public class MainViewModel : ViewModelBase
 
     private ISearch? BinarySearch { get; set; }
 
-    private bool IsNoOfEntriesValid
-    {
-        get => _isNoOfEntriesValid;
-        set => SetProperty(ref _isNoOfEntriesValid, value);
-    }
+    [ObservableProperty]
+    private bool _isNoOfEntriesValid;
 
-    private bool IsNoOfSearchesValid
-    {
-        get => _isNoOfSearchesValid;
-        set => SetProperty(ref _isNoOfSearchesValid, value);
-    }
+    [ObservableProperty]
+    private bool _isNoOfSearchesValid;
 
     private bool IsInputValid => IsNoOfEntriesValid && IsNoOfSearchesValid;
-
-    /***************************************** Private Fields ******************************************/
-    private int? _targetValue;
-    private string _noOfEntriesText = string.Empty;
-    private string _noOfSearchesText = string.Empty;
-    private int _noOfEntries;
-    private int _noOfSearches;
-    private bool _isSimulating;
-    private Visibility _progressBarVisibility;
-    private double _progressBarValue;
-    private int? _targetIndex;
-    private double _linearAvgNoOfIterations;
-    private double _linearAvgElapsedTime;
-    private double _binaryAvgNoOfIterations;
-    private double _binaryAvgElapsedTime;
-    private bool _isNoOfEntriesValid;
-    private bool _isNoOfSearchesValid;
-    private bool _isSearchEnabled;
 }
