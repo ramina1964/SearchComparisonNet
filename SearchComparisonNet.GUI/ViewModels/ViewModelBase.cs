@@ -9,5 +9,7 @@ public class ViewModelBase : ObservableObject, INotifyDataErrorInfo
 
     public bool HasErrors => false;
 
+#pragma warning disable CS0067 // Required by INotifyDataErrorInfo but intentionally never raised (validation is via FluentValidation).
     public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
+#pragma warning restore CS0067
 }
