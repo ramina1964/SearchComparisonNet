@@ -2,7 +2,7 @@ namespace SearchComparisonNet.Kernel.Interfaces;
 
 public interface ISearch
 {
-    int NoOfEntries { get; set; }
+    int NoOfEntries { get; }
 
     Func<int> NextRandomNo { get; }
 
