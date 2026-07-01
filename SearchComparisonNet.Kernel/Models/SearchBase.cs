@@ -2,7 +2,10 @@
 
 public abstract class SearchBase(IDataGenerator dataGen) : ISearch
 {
-    public int NoOfEntries { get; set; } = dataGen.NoOfEntries;
+    // Derived from the actual dataset so it can never desync from Data. The generator produces
+    // Data with exactly NoOfEntries elements, so this preserves the existing value while removing
+    // the previously public setter (K-2).
+    public int NoOfEntries => Data.Length;
 
     public Func<int> NextRandomNo { get; } = dataGen.NextRandomNo;
 
