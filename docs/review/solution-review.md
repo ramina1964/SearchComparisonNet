@@ -168,6 +168,8 @@ private async void Simulate() { ... }
 ---
 
 ### <a id="g-4"></a>G-4 🟠 [Approval] — DI configured but unused
+> **✅ Resolved** (verified during the `fix/haserrors-g7` backlog reconciliation): DI is now wired and used. `ServiceCollectionExtensions.AddSearchComparisonServices` registers `ISearchComparisonFactory`, `MainViewModel`, and `MainView`; `App.OnStartup` resolves `MainView` via `GetRequiredService<MainView>()`; and `MainView` receives a constructor-injected `MainViewModel` (`DataContext = mainViewModel`). The finding below describes the original (pre-fix) state.
+
 **File:** `App.xaml.cs`
 
 The container registers `DataParameters`, `IDataGenerator`, `LinearSearch`, `BinarySearch`, `MainViewModel`, `MainView`… but `MainViewModel`'s constructor is **parameterless** and `new`s up its own `DataGenerator`/searches inside `Simulate()`. The view almost certainly sets `DataContext = new MainViewModel()` (XAML/code), so the entire DI graph is dead weight. Also: `DataParameters` has **no parameterless constructor**, so `GetService<DataParameters>()` would fail if it were ever resolved.
@@ -194,6 +196,8 @@ private void Cancel() { }   // empty
 ---
 
 ### <a id="g-6"></a>G-6 🟡 [Approval] — Declared product-range validation is never enforced
+> **✅ Resolved** (verified during the `fix/haserrors-g7` backlog reconciliation): the dead members were removed — `MinProductValue`, `MaxProductValue`, and `MaxProductError` no longer exist anywhere in the GUI, so there is no unenforced declared rule left. The finding below describes the original state.
+
 **File:** `ViewModels/MainViewModel.cs` + `ViewModels/InputValidation.cs`
 
 `MainViewModel` declares `MinProductValue`, `MaxProductValue`, and `MaxProductError` ("Product of No. of searches and No. of entries must be in the interval…"), but `InputValidation` has **no rule** referencing them. The product constraint the code clearly intends is unenforced; the fields/message are dead.
@@ -203,6 +207,8 @@ private void Cancel() { }   // empty
 ---
 
 ### <a id="g-7"></a>G-7 🟡 [Approval] — `HasErrors` swallows exceptions and returns `true`
+> **✅ Resolved** (simplified in `fc134fa`, then trimmed to a minimal `INotifyDataErrorInfo` in PR #14; verified during the `fix/haserrors-g7` backlog reconciliation): `ViewModelBase` now reads `public bool HasErrors => false` with no try/catch, and `ViewModelBaseTests` guards this contract. The finding below describes the original (pre-fix) state.
+
 **File:** `ViewModels/ViewModelBase.cs`
 
 ```csharp

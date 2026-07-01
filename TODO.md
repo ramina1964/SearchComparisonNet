@@ -59,6 +59,24 @@ Broadened automated coverage beyond the search algorithms and adopted xUnit v3 f
 - Adopted `TheoryData<T>`, `Assert.Multiple`, and `[ClassData]`/`[MemberData]`.
 - Validated with a clean full run: 185 tests passing, 0 warnings.
 
+### Backlog reconciliation against current code (`fix/haserrors-g7`)
+Audited every open review finding against the current source (the review was written at a
+50-test baseline and predates several merged PRs). Three findings were already resolved by
+earlier work but had never been crossed off:
+
+- **G-7** (`HasErrors` swallowed exceptions and returned `true`) - resolved: `ViewModelBase`
+  now reads `public bool HasErrors => false` with no try/catch (simplified in `fc134fa`, then
+  trimmed to minimal `INotifyDataErrorInfo` in PR #14). `ViewModelBaseTests` guards this contract.
+- **G-4** (DI container configured but unused) - resolved: `ServiceCollectionExtensions` registers
+  the graph, `App.xaml.cs` resolves `MainView` via `GetRequiredService<MainView>()`, and
+  `MainView` receives a constructor-injected `MainViewModel` (`DataContext = mainViewModel`).
+- **G-6** (declared product-range validation never enforced) - resolved: the dead
+  `MinProductValue`/`MaxProductValue`/`MaxProductError` members no longer exist anywhere in the GUI.
+
+`K-3 (values)` is a settled no-op: `ProblemConstants.MinNoOfEntries => 10_000` carries an explicit
+"value preserved per decision" comment. The corresponding finding sections in
+`solution-review.md` were annotated as resolved to keep the audit trail accurate.
+
 ## Remaining backlog
 
 > Single source of truth for outstanding work. These items originate from the code review in
@@ -68,15 +86,12 @@ Broadened automated coverage beyond the search algorithms and adopted xUnit v3 f
 
 ### Approval items (code-level findings)
 
-1. **G-4** - use (or remove) the DI container. *(Pairs well with test-infra Option C below.)*
-2. **G-6** - enforce the declared product-range validation rule.
-3. **G-7** - fix `HasErrors` swallowing exceptions and returning `true`.
-   *(Note: `ViewModelBaseTests` currently asserts the no-op `HasErrors => false` contract; those
-   tests must be updated in lockstep when this behavior changes.)*
-4. **K-2** - make `NoOfEntries` consistent with `Data` (read-only / private setter).
-5. **K-3 (values)** - only if `100_00` / grouping were genuine typos (reformatting already
-   applied; values intentionally preserved per the PR #2 decision).
-6. **K-5** - move `NextRandomNo` off the search type onto the generator.
+1. **K-2** - make `NoOfEntries` consistent with `Data` (read-only / private setter).
+   `SearchBase` still exposes `public int NoOfEntries { get; set; }`, independently settable and
+   not tied to `Data.Length`, so it can desync from the underlying dataset.
+2. **K-5** - move `NextRandomNo` off the search type onto the generator. `SearchBase` still
+   exposes `Func<int> NextRandomNo` copied from the generator; random probe generation is a
+   `DataGenerator` concern and should be drawn from it directly.
 
 ### Test-infrastructure options (deferred)
 
@@ -89,8 +104,7 @@ Broadened automated coverage beyond the search algorithms and adopted xUnit v3 f
 
 ## Suggested ordering & effort
 
-- **G-7** is small, well-scoped, and closely tied to recently added tests - a natural next step.
-- **K-2** and **K-5** are small Kernel encapsulation/placement fixes and are low-risk.
-- **G-6** is a focused validation change that pairs with the existing `InputValidation` tests.
-- **G-4** + **Option C** form the largest architectural effort and are best tackled together.
-- **K-3 (values)** is likely a no-op unless the grouping is confirmed to be a genuine typo.
+- **K-2** and **K-5** are the only open code findings - both small, low-risk Kernel
+  encapsulation/placement fixes. K-2 (tighten `NoOfEntries`) is the more self-contained of the two.
+- **Option B** is the next-most-valuable test-infra step (real cancellation-contract coverage
+  without WPF); **Option C** is the larger effort and is best scheduled deliberately.
