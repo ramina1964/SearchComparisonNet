@@ -29,13 +29,16 @@ public class MainViewModelSimulationTests
     [Fact]
     public async Task Simulation_populates_results_and_enables_search()
     {
-        var sut = CreateForRun(noOfSearches: 1_000, linearIterations: 1, binaryIterations: 1, out _);
+        var sut = CreateForRun(noOfSearches: 1_000, linearIterations: 3, binaryIterations: 2, out _);
 
         await sut.SimulateCommand.ExecuteAsync(null);
 
-        Assert.NotNull(sut.LinearSearchResults);
-        Assert.NotNull(sut.BinarySearchResults);
-        Assert.True(sut.IsSearchEnabled);
+        // A completed run publishes its aggregates via the average properties (the standalone
+        // *SearchResults holders were removed) and enables the search panel.
+        Assert.Multiple(
+            () => Assert.Equal(3.0, sut.LinearAvgNoOfIterations),
+            () => Assert.Equal(2.0, sut.BinaryAvgNoOfIterations),
+            () => Assert.True(sut.IsSearchEnabled));
     }
 
     [Fact]
