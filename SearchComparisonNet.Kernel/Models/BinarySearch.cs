@@ -2,43 +2,51 @@
 
 public sealed class BinarySearch(IDataGenerator dataGen) : SearchBase(dataGen)
 {
+    // Remember: The array is sorted ascendingly
     public override ISearchItem FindItem(int value)
     {
-        const int noOfIterations = 0;
-        return FindItemWithBinarySearch(0, NoOfEntries - 1, value, noOfIterations);
-    }
+        var low = 0;
+        var high = NoOfEntries - 1;
+        var noOfIterations = 0;
 
-    // Remember: The array is sorted ascendingly
-    private ISearchItem FindItemWithBinarySearch(int low, int high, int value, int noOfIterations)
-    {
-        noOfIterations++;
-
-        // Value is non-existant, initialize and return new SearchItem with TargetIndex = null.
-        if (low > high)
+        while (true)
         {
-            return new SearchItem()
-            {
-                TargetIndex = null,
-                TargetValue = value,
-                NoOfIterations = noOfIterations
-            };
-        }
+            noOfIterations++;
 
-        // Value is found, initialize and return new SearchItem for this value.
-        var mid = (low + high) / 2;
-        if (Data[mid] == value)
-        {
-            return new SearchItem()
+            // Value is non-existent: return a SearchItem with TargetIndex = null.
+            if (low > high)
             {
-                TargetIndex = mid,
-                TargetValue = value,
-                NoOfIterations = noOfIterations
-            };
-        }
+                return new SearchItem
+                {
+                    TargetIndex = null,
+                    TargetValue = value,
+                    NoOfIterations = noOfIterations
+                };
+            }
 
-        // Throw away half of the list based on value of Data[mid] and continue searching in the remaining list.
-        return Data[mid] > value
-            ? FindItemWithBinarySearch(low, mid - 1, value, noOfIterations)
-            : FindItemWithBinarySearch(mid + 1, high, value, noOfIterations);
+            // Overflow-safe midpoint (avoids (low + high) overflowing for large ranges).
+            var mid = low + (high - low) / 2;
+
+            // Value is found: return a SearchItem for this value.
+            if (Data[mid] == value)
+            {
+                return new SearchItem
+                {
+                    TargetIndex = mid,
+                    TargetValue = value,
+                    NoOfIterations = noOfIterations
+                };
+            }
+
+            // Throw away half of the list based on Data[mid] and continue searching the rest.
+            if (Data[mid] > value)
+            {
+                high = mid - 1;
+            }
+            else
+            {
+                low = mid + 1;
+            }
+        }
     }
 }

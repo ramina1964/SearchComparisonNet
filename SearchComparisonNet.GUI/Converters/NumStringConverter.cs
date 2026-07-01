@@ -32,10 +32,10 @@ public class NumStringConverter : IValueConverter
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         var valueStr = value as string;
-        if (int.TryParse(valueStr, out var resInt))
+        if (int.TryParse(valueStr, NumberStyles.Integer, CultureInfo.InvariantCulture, out var resInt))
             return resInt;
 
-        if (double.TryParse(valueStr, out var resDb))
+        if (double.TryParse(valueStr, NumberStyles.Float, CultureInfo.InvariantCulture, out var resDb))
             return resDb;
 
         // Must be a string
