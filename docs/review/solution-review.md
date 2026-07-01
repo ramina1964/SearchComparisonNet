@@ -35,7 +35,7 @@ The solution is small, readable, and cleanly organized (Kernel / GUI-MVVM / Test
 | [G-3](#g-3) | 🟠 | GUI | `async void Simulate()` — unobserved exceptions crash the app | [Approval] |
 | [G-4](#g-4) | 🟠 | GUI | DI container is fully configured but never used — `MainViewModel` is `new`'d | [Approval] |
 | [G-5](#g-5) | 🟠 | GUI | `CancelCommand` is wired to a no-op `Cancel()` — button does nothing | [Approval] |
-| [K-2](#k-2) | 🟡 | Kernel | `SearchBase.NoOfEntries` has a public setter that can desync from `Data` | [Approval] |
+| [K-2](#k-2) | ✅ | Kernel | `SearchBase.NoOfEntries` has a public setter that can desync from `Data` | [Approval] |
 | [K-3](#k-3) | 🟡 | Kernel | `ProblemConstants` literals look wrong (`100_00`, `5_00_000`) | [Approval] |
 
 **Conservative cleanups available now** (full list in [§4](#4-conservative-refactor-worklist-safe)): file rename to match type, dead code/fields, modern C# idioms, converter simplification, namespace style consistency, and unused-validation removal.
@@ -65,6 +65,8 @@ public LinearSearch(IDataGenerator dataGen) : base(dataGen)
 
 ### <a id="k-2"></a>K-2 🟡 [Approval] — `NoOfEntries` public setter can desync from `Data`
 **File:** `Models/SearchBase.cs`
+
+> **✅ Resolved** (PR #18, `fix/noofentries-encapsulation-k2`): `NoOfEntries` is now derived and read-only — `public int NoOfEntries => Data.Length` — and the setter was removed from `ISearch`, so it can never desync from the dataset. Production `DataGenerator` and the test `FakeDataGenerator` both keep `NoOfEntries == Data.Length`, so behavior was preserved. The finding below describes the original (pre-fix) state.
 
 ```csharp
 public int NoOfEntries { get; set; }   // settable
@@ -102,6 +104,8 @@ The file is named `ISearch.cs` but contains `interface ISearchItem` (and there i
 
 ### <a id="k-5"></a>K-5 ⚪ [Approval] — `NextRandomNo` lives awkwardly on the search type
 **Files:** `Models/SearchBase.cs`, `Interfaces/IDataGenerator.cs`
+
+> **✅ Resolved** (PR #19, `refactor/nextrandomno-to-generator-k5`): `NextRandomNo` was removed from `ISearch`/`SearchBase` and surfaced on `ISearchComparison`, wired in `SearchComparisonFactory` from the single shared `DataGenerator`. `MainViewModel` now draws probe values from the comparison instead of a search instance, decoupling random generation from a specific search. The finding below describes the original state.
 
 `SearchBase` exposes `Func<int> NextRandomNo` (copied from the generator). The GUI then calls `LinearSearch.NextRandomNo()` to drive **both** simulations — coupling random-value generation to a specific search instance and contributing to [G-1](#g-1). Random generation is a `DataGenerator` concern.
 
