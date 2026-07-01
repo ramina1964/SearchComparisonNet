@@ -90,6 +90,19 @@ Closed the two remaining open code-level findings from the review:
   from the comparison instead of a search instance.
 - Both shipped behavior-preserving with the full suite green (185 tests passing, 0 failing).
 
+### Tier 1 - Kernel & converter polish (`chore/kernel-and-converter-polish`)
+Small, low-risk, behavior-preserving cleanup that also lifted coverage on previously-untested units:
+
+- **Iterative binary search** - `BinarySearch.FindItem` was converted from recursion to an iterative
+  `while` loop, preserving the exact `NoOfIterations` counting semantics (guarded by the existing
+  search-equivalence and edge-case tests). Removes per-level call overhead and mirrors `LinearSearch`.
+- **Overflow-safe midpoint** - `(low + high) / 2` replaced with `low + (high - low) / 2`.
+- **Converter unit tests** - added `NumStringConverterTests` and `NegativeConverterTests` in the
+  `net10.0-windows` `ViewModelTests` project (both converters were previously at 0% coverage).
+- **`ConvertBack` culture consistency** - `NumStringConverter.ConvertBack` now parses with
+  `CultureInfo.InvariantCulture`, matching `Convert`.
+- Shipped with the full suite green (224 tests: 115 Kernel + 109 ViewModel, 0 failing, 0 skipped).
+
 ## Remaining backlog
 
 > Single source of truth for outstanding work. These items originate from the code review in
@@ -102,6 +115,18 @@ Closed the two remaining open code-level findings from the review:
 All code-level findings from the review are now resolved (K-2 and K-5 shipped in PRs #18 and #19;
 G-4/G-6/G-7 and K-3 were reconciled earlier). No open code findings remain.
 
+### Polish backlog (lower priority, for later reference)
+
+Non-blocking readability/robustness follow-ups captured so they are not lost:
+
+- **`NumStringConverter.Convert` culture on parse** - `long.TryParse(text, ...)` /
+  `double.TryParse(text, ...)` in `Convert` parse `value.ToString()` without an explicit culture.
+  Consider pinning `InvariantCulture` on those parses too for full symmetry (deliberately left out
+  of Tier 1 to keep that change minimal and approved-scope only).
+- **K-6 leftovers** - the `IndexOutOfRangeError` message `{0}` literal and the
+  `0 > index || index > NoOfEntries - 1` -> `index < 0 || index >= NoOfEntries` clarity tweak
+  remain open under K-6.
+
 ### Test-infrastructure options (deferred)
 
 - **Option B** - extract the cancellation-aware iteration logic into a Kernel-side (or plain,
@@ -113,9 +138,11 @@ G-4/G-6/G-7 and K-3 were reconciled earlier). No open code findings remain.
 
 ## Suggested ordering & effort
 
-- All open code-level findings are done; only the deferred **test-infrastructure options** remain.
+- All open code-level findings are done, and the **Tier 1 - Kernel & converter polish** branch has
+  now shipped (see Completed above).
 - **Option B** is the next-most-valuable step (real cancellation-contract coverage without WPF).
 - **Option C** is partially in place already: the test project targets `net10.0-windows` and references
   the GUI, and `MainViewModel` is exercised through a factory abstraction. What remains for full VM
   testability is a UI-`SynchronizationContext` fixture to exercise dispatcher marshaling; schedule
   deliberately.
+- The **Polish backlog** items are optional follow-ups, to be picked up opportunistically.

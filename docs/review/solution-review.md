@@ -119,6 +119,8 @@ The file is named `ISearch.cs` but contains `interface ISearchItem` (and there i
 - `IndexOutOfRangeError` message uses `{0}` literally (not a format placeholder) — reads oddly: `"[{0}, 9999]"`. Likely intended to be `0`. *(Message text only — confirm, then [Safe].)*
 - `0 > index || index > NoOfEntries - 1` → clearer as `index < 0 || index >= NoOfEntries`.
 - `GenerateData()` could use a collection expression / simplified construction.
+- **`BinarySearch` recursion → iteration** (`chore/kernel-and-converter-polish`): `FindItemWithBinarySearch` was tail-recursive; converting it to an iterative `while (low <= high)` loop removes per-level call overhead and makes it structurally parallel to `LinearSearch`, while preserving the `NoOfIterations` counting semantics. *(Behavior-preserving, guarded by existing search tests → [Safe].)*
+- **Overflow-safe midpoint** (`chore/kernel-and-converter-polish`): `(low + high) / 2` replaced with `low + (high - low) / 2` to avoid the classic integer-overflow midpoint bug. *(Defensive one-liner → [Safe].)*
 
 ---
 
@@ -355,6 +357,7 @@ A running record of which findings have been actioned, in which PR, and what rem
 |---|---|---|
 | **#2** `refactor/solution-review` *(merged)* | §4 [Safe] worklist (K-4, K-6, K-3 reformat, G-8, G-9, G-10, T-2, T-3) **+** T-1 **+** K-1/G-1 | Decision **B**. Shared-data bug fixed; real binary-search tests added (50 → 56 tests). |
 | **`gui-async-threading-fixes`** *(this PR)* | **G-3** (`async void` → `AsyncRelayCommand`/`Task`), **G-2** (cross-thread UI → `Task.Run` + `IProgress<T>`, UI-thread reset), **G-5** (no-op Cancel → real `CancellationToken` cancellation) | Decision **A** for this batch. Behavior changes, build-verified (0 warnings). See "Testing decision" below. |
+| **`chore/kernel-and-converter-polish`** | **K-6** (extends): `BinarySearch` recursion → iterative loop + overflow-safe midpoint. Plus converter test coverage (relates to **G-8**) and a `NumStringConverter.ConvertBack` `InvariantCulture` fix. | Tier 1 polish. Behavior-preserving; `NumStringConverter`/`NegativeConverter` unit tests added in the `net10.0-windows` `ViewModelTests` project. |
 
 ### Testing decision for `gui-async-threading-fixes` (Option A)
 
