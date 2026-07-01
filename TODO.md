@@ -77,6 +77,19 @@ earlier work but had never been crossed off:
 "value preserved per decision" comment. The corresponding finding sections in
 `solution-review.md` were annotated as resolved to keep the audit trail accurate.
 
+### Kernel encapsulation fixes (`fix/noofentries-encapsulation-k2` PR #18, `refactor/nextrandomno-to-generator-k5` PR #19)
+Closed the two remaining open code-level findings from the review:
+
+- **K-2** - `SearchBase.NoOfEntries` is now derived and read-only (`public int NoOfEntries => Data.Length`),
+  so it can never desync from the dataset; the setter was removed from `ISearch`. Production
+  `DataGenerator` and the test `FakeDataGenerator` both keep `NoOfEntries == Data.Length`, so behavior
+  was preserved.
+- **K-5** - random probe generation moved off the search type onto the shared generator. `NextRandomNo`
+  was removed from `ISearch`/`SearchBase` and surfaced on `ISearchComparison`, wired in
+  `SearchComparisonFactory` from the single shared `DataGenerator`. `MainViewModel` now draws probes
+  from the comparison instead of a search instance.
+- Both shipped behavior-preserving with the full suite green (185 tests passing, 0 failing).
+
 ## Remaining backlog
 
 > Single source of truth for outstanding work. These items originate from the code review in
@@ -86,12 +99,8 @@ earlier work but had never been crossed off:
 
 ### Approval items (code-level findings)
 
-1. **K-2** - make `NoOfEntries` consistent with `Data` (read-only / private setter).
-   `SearchBase` still exposes `public int NoOfEntries { get; set; }`, independently settable and
-   not tied to `Data.Length`, so it can desync from the underlying dataset.
-2. **K-5** - move `NextRandomNo` off the search type onto the generator. `SearchBase` still
-   exposes `Func<int> NextRandomNo` copied from the generator; random probe generation is a
-   `DataGenerator` concern and should be drawn from it directly.
+All code-level findings from the review are now resolved (K-2 and K-5 shipped in PRs #18 and #19;
+G-4/G-6/G-7 and K-3 were reconciled earlier). No open code findings remain.
 
 ### Test-infrastructure options (deferred)
 
@@ -104,7 +113,9 @@ earlier work but had never been crossed off:
 
 ## Suggested ordering & effort
 
-- **K-2** and **K-5** are the only open code findings - both small, low-risk Kernel
-  encapsulation/placement fixes. K-2 (tighten `NoOfEntries`) is the more self-contained of the two.
-- **Option B** is the next-most-valuable test-infra step (real cancellation-contract coverage
-  without WPF); **Option C** is the larger effort and is best scheduled deliberately.
+- All open code-level findings are done; only the deferred **test-infrastructure options** remain.
+- **Option B** is the next-most-valuable step (real cancellation-contract coverage without WPF).
+- **Option C** is partially in place already: the test project targets `net10.0-windows` and references
+  the GUI, and `MainViewModel` is exercised through a factory abstraction. What remains for full VM
+  testability is a UI-`SynchronizationContext` fixture to exercise dispatcher marshaling; schedule
+  deliberately.
