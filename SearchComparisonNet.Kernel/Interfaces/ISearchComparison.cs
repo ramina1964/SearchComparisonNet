@@ -7,4 +7,8 @@ public interface ISearchComparison
     ISearch LinearSearch { get; }
 
     ISearch BinarySearch { get; }
+
+    // Draws random probe values from the shared generator that produced the dataset.
+    // Probe generation is a data-generation concern, so it lives here rather than on a search.
+    Func<int> NextRandomNo { get; }
 }

@@ -136,6 +136,7 @@ public partial class MainViewModel : ViewModelBase
         var searchComparison = _searchComparisonFactory.Create(NoOfEntries);
         LinearSearch = searchComparison.LinearSearch;
         BinarySearch = searchComparison.BinarySearch;
+        var nextRandomNo = searchComparison.NextRandomNo;
 
         IsSimulating = true;
 
@@ -149,8 +150,8 @@ public partial class MainViewModel : ViewModelBase
         {
             // Linear and binary runs differ only in how aggressively their elapsed time is
             // rounded for display (1 vs 5 fractional digits); the loop itself is identical.
-            var linearResults = await RunSimulationAsync(LinearSearch!, roundDigits: 1, progress, token);
-            var binaryResults = await RunSimulationAsync(BinarySearch!, roundDigits: 5, progress, token);
+            var linearResults = await RunSimulationAsync(LinearSearch!, nextRandomNo, roundDigits: 1, progress, token);
+            var binaryResults = await RunSimulationAsync(BinarySearch!, nextRandomNo, roundDigits: 5, progress, token);
 
             LinearAvgNoOfIterations = linearResults.AvgNoOfIterations;
             LinearAvgElapsedTime = linearResults.AvgElapsedTime;
@@ -176,7 +177,7 @@ public partial class MainViewModel : ViewModelBase
         }
     }
 
-    private Task<ISimulationResults> RunSimulationAsync(ISearch search, int roundDigits, IProgress<double> progress, CancellationToken token) =>
+    private Task<ISimulationResults> RunSimulationAsync(ISearch search, Func<int> nextRandomNo, int roundDigits, IProgress<double> progress, CancellationToken token) =>
         Task.Run(() =>
         {
             var totalNoOfIterations = 0.0;
@@ -185,7 +186,7 @@ public partial class MainViewModel : ViewModelBase
             for (var j = 0; j < NoOfSearches; j++)
             {
                 token.ThrowIfCancellationRequested();
-                var value = search.NextRandomNo();
+                var value = nextRandomNo();
                 var searchItem = search.FindItem(value);
                 totalNoOfIterations += searchItem.NoOfIterations;
                 // Throttle progress by elapsed time: Report(...) marshals to the UI thread, so

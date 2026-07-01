@@ -7,8 +7,6 @@ public abstract class SearchBase(IDataGenerator dataGen) : ISearch
     // the previously public setter (K-2).
     public int NoOfEntries => Data.Length;
 
-    public Func<int> NextRandomNo { get; } = dataGen.NextRandomNo;
-
     public int this[int index]
     {
         get => Data[index];

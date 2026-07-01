@@ -9,13 +9,15 @@ public sealed class SearchComparisonFactory : ISearchComparisonFactory
         var dataParams = new DataParameters(noOfEntries);
         var dataGen = new DataGenerator(dataParams);
 
-        return new SearchComparison(new LinearSearch(dataGen), new BinarySearch(dataGen));
+        return new SearchComparison(new LinearSearch(dataGen), new BinarySearch(dataGen), dataGen.NextRandomNo);
     }
 
-    private sealed class SearchComparison(ISearch linearSearch, ISearch binarySearch) : ISearchComparison
+    private sealed class SearchComparison(ISearch linearSearch, ISearch binarySearch, Func<int> nextRandomNo) : ISearchComparison
     {
         public ISearch LinearSearch { get; } = linearSearch;
 
         public ISearch BinarySearch { get; } = binarySearch;
+
+        public Func<int> NextRandomNo { get; } = nextRandomNo;
     }
 }
