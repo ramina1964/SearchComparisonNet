@@ -43,18 +43,54 @@ Focused pass over `SearchComparisonNet.GUI` for readability, DRY, and modernizat
 - Confirmed the WPF/build settings are minimal and correct for `net10.0-windows`.
 - Solution builds warning-free with the full test suite (132 tests) passing.
 
+### Extend test coverage and xUnit v3 idioms (`test/expand-coverage`, merged via PR #15)
+Broadened automated coverage beyond the search algorithms and adopted xUnit v3 features.
+
+- Added `DataGeneratorTests` (output invariants: exact count, in-range values, strictly
+  ascending, unique; plus `NextRandomNo` range and single-element datasets).
+- Added `InputValidationTests` (FluentValidation rules for entries/searches: required,
+  non-integer, out-of-range, in-range).
+- Added `ViewModelBaseTests` locking in the current `INotifyDataErrorInfo` no-op contract.
+- Added `MainViewModelCancellationTests` for cancel/retry edges around `SimulateCommand`.
+- Fixed a latent break: PR #14 removed the dead `LinearSearchResults`/`BinarySearchResults`
+  from `MainViewModel` but left `MainViewModelSimulationTests` referencing them, so the test
+  project could not compile from a clean build; updated it to the average-iteration +
+  `IsSearchEnabled` contract.
+- Adopted `TheoryData<T>`, `Assert.Multiple`, and `[ClassData]`/`[MemberData]`.
+- Validated with a clean full run: 185 tests passing, 0 warnings.
+
 ## Remaining backlog
 
-## 1. Extend test coverage and leverage xUnit v3 features
-**Suggested branch:** `test/expand-coverage`
+> Single source of truth for outstanding work. These items originate from the code review in
+> [`docs/review/solution-review.md`](docs/review/solution-review.md); see that document for the
+> full findings and rationale behind each one. Every change ships on its own branch as a PR into
+> `main` (including docs-only changes).
 
-> Note: the test project already targets xUnit v3 (`xunit.v3` 3.2.2 with `xunit.runner.visualstudio` 3.1.5), so this is about broadening coverage and adopting v3 idioms, not upgrading the framework.
+### Approval items (code-level findings)
 
-- Add tests beyond `LinearSearch`/`BinarySearch`: `InputValidation` rules, `ViewModelBase` error tracking (`HasErrors`/`GetErrors`), and `DataGenerator` output.
-- Adopt xUnit v3 features where they improve clarity: strongly-typed `TheoryData<T>`, `Assert.Multiple`, and `[ClassData]`/`[MemberData]` for larger datasets.
-- Consider edge cases: empty/single-element datasets, duplicate values, and cancellation paths in the simulation.
-- Validate with a full test run.
+1. **G-4** - use (or remove) the DI container. *(Pairs well with test-infra Option C below.)*
+2. **G-6** - enforce the declared product-range validation rule.
+3. **G-7** - fix `HasErrors` swallowing exceptions and returning `true`.
+   *(Note: `ViewModelBaseTests` currently asserts the no-op `HasErrors => false` contract; those
+   tests must be updated in lockstep when this behavior changes.)*
+4. **K-2** - make `NoOfEntries` consistent with `Data` (read-only / private setter).
+5. **K-3 (values)** - only if `100_00` / grouping were genuine typos (reformatting already
+   applied; values intentionally preserved per the PR #2 decision).
+6. **K-5** - move `NextRandomNo` off the search type onto the generator.
+
+### Test-infrastructure options (deferred)
+
+- **Option B** - extract the cancellation-aware iteration logic into a Kernel-side (or plain,
+  `net10.0`-referenceable) helper and unit-test the G-5 cancellation contract (token honored,
+  `OperationCanceledException` thrown) without WPF. Moderate effort.
+- **Option C** - full VM testability: re-target the test project to `net10.0-windows`, add a GUI
+  `ProjectReference`, refactor `MainViewModel` for constructor injection (pairs with G-4), and add
+  a UI-`SynchronizationContext` fixture to exercise dispatcher marshaling. Largest effort.
 
 ## Suggested ordering & effort
 
-- **One task remains.** Expanding test coverage (`test/expand-coverage`) is incremental and low-risk - it adds tests without changing production code.
+- **G-7** is small, well-scoped, and closely tied to recently added tests - a natural next step.
+- **K-2** and **K-5** are small Kernel encapsulation/placement fixes and are low-risk.
+- **G-6** is a focused validation change that pairs with the existing `InputValidation` tests.
+- **G-4** + **Option C** form the largest architectural effort and are best tackled together.
+- **K-3 (values)** is likely a no-op unless the grouping is confirmed to be a genuine typo.
