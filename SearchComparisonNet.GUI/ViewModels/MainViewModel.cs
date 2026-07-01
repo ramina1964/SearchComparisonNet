@@ -13,8 +13,8 @@ public partial class MainViewModel : ViewModelBase
         _searchComparisonFactory = searchComparisonFactory;
 
         InputValidation = new InputValidation() { ClassLevelCascadeMode = CascadeMode.Stop };
-        NoOfEntriesText = ProblemConstants.InitialNoOfEntries.ToString();
-        NoOfSearchesText = ProblemConstants.InitialNoOfSearches.ToString();
+        NoOfEntriesText = ProblemConstants.InitialNoOfEntries.ToString(CultureInfo.InvariantCulture);
+        NoOfSearchesText = ProblemConstants.InitialNoOfSearches.ToString(CultureInfo.InvariantCulture);
 
         IsSimulating = false;
         IsSearchEnabled = false;
@@ -177,7 +177,7 @@ public partial class MainViewModel : ViewModelBase
         }
     }
 
-    private Task<ISimulationResults> RunSimulationAsync(ISearch search, Func<int> nextRandomNo, int roundDigits, IProgress<double> progress, CancellationToken token) =>
+    private Task<SimulationResults> RunSimulationAsync(ISearch search, Func<int> nextRandomNo, int roundDigits, IProgress<double> progress, CancellationToken token) =>
         Task.Run(() =>
         {
             var totalNoOfIterations = 0.0;
@@ -207,7 +207,7 @@ public partial class MainViewModel : ViewModelBase
             return SimulationResults(totalNoOfIterations, elapsedTimeInSec);
         }, token);
 
-    private ISimulationResults SimulationResults(double totalNoOfIterations, double totalElapsedTime) =>
+    private SimulationResults SimulationResults(double totalNoOfIterations, double totalElapsedTime) =>
         new SimulationResults()
         {
             NoOfEntries = NoOfEntries,

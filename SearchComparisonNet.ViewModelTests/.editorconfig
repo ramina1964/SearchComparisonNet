@@ -1,0 +1,9 @@
+# Test-project analyzer relaxations. Inherits all rules from the repo-root .editorconfig
+# (this file intentionally omits `root = true`) and only relaxes rules that are noise for tests.
+[*.cs]
+# CA1707: underscore-separated test method names are the standard xUnit convention.
+dotnet_diagnostic.CA1707.severity = none
+# CA1861: inline test data commonly passes constant array arguments (e.g. [InlineData(new[]{...})]).
+dotnet_diagnostic.CA1861.severity = none
+# CA1305: tests intentionally build locale-independent numeric strings via int.ToString().
+dotnet_diagnostic.CA1305.severity = none

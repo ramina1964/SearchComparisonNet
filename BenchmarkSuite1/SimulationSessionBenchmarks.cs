@@ -16,7 +16,7 @@ public class SimulationSessionBenchmarks
 {
     private const int QuerySeed = 12345;
     private const int NoOfSearches = 5_000;
-    private ISearchComparisonFactory _factory = null!;
+    private SearchComparisonFactory _factory = null!;
     private int[] _queries = null!;
     [Params(10_000, 100_000, 500_000)]
     public int NoOfEntries { get; set; }
