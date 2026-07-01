@@ -10,7 +10,7 @@ public interface IDataGenerator
 
     int NextRandomNo();
 
-    public int[] Data { get; }
+    int[] Data { get; }
 
     int[] GenerateData();
 }

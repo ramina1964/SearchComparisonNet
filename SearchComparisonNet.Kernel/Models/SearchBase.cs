@@ -13,15 +13,15 @@ public abstract class SearchBase(IDataGenerator dataGen) : ISearch
         set
         {
             if (index < 0 || index >= NoOfEntries)
-            { throw new IndexOutOfRangeException(IndexOutOfRangeError); }
+            { throw new ArgumentOutOfRangeException(nameof(index), IndexOutOfRangeError); }
 
             Data[index] = value;
         }
     }
 
-    public string IndexOutOfRangeError => $"Index must be an integer in the interval [{0}, {NoOfEntries - 1}].";
+    public string IndexOutOfRangeError => $"Index must be an integer in the interval [0, {NoOfEntries - 1}].";
 
     public abstract ISearchItem FindItem(int value);
 
-    protected int[] Data = dataGen.Data;
+    protected int[] Data { get; } = dataGen.Data;
 }

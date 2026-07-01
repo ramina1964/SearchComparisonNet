@@ -5,6 +5,9 @@
 	<Nullable>enable</Nullable>
 	<ImplicitUsings>enable</ImplicitUsings>
 	<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	<AnalysisLevel>latest</AnalysisLevel>
+	<AnalysisMode>Recommended</AnalysisMode>
   </PropertyGroup>
 
 </Project>

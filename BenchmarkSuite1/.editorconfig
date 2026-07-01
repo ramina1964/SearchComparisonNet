@@ -1,0 +1,9 @@
+# Benchmark-project analyzer relaxations. Inherits all rules from the repo-root .editorconfig
+# (this file intentionally omits `root = true`) and only relaxes rules that are noise for benchmarks.
+[*.cs]
+# CA1707: underscore-separated member names are common in benchmark/test-style code.
+dotnet_diagnostic.CA1707.severity = none
+# CA1861: inline data commonly passes constant array arguments.
+dotnet_diagnostic.CA1861.severity = none
+# CA1305: benchmark helpers may build locale-independent numeric strings via int.ToString().
+dotnet_diagnostic.CA1305.severity = none

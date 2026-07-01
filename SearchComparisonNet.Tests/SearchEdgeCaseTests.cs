@@ -7,7 +7,7 @@ public sealed class SearchEdgeCaseTests
 {
     public static TheoryData<int[], int, int?> Cases => new()
     {
-        { new int[] { }, 5, null },                 // empty dataset
+        { Array.Empty<int>(), 5, null },            // empty dataset
         { new[] { 42 }, 42, 0 },                    // single element, found
         { new[] { 42 }, 7, null },                  // single element, missing
         { new[] { 10, 20, 30, 40, 50 }, 10, 0 },    // first element
