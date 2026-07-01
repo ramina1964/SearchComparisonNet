@@ -356,16 +356,9 @@ Automated VM-level tests were **deliberately deferred** for this PR. Rationale:
 
 **Manual verification checklist** (until automated coverage lands): run the app → start **Simulate** with a large entry/search count → click **Cancel** mid-run → expect: UI stays responsive, progress bar resets to 0/hidden, no crash, **Simulate** re-enables, results from the cancelled run are not shown.
 
-### Future work (deferred — not yet scheduled)
+### Outstanding work
 
-- **[Test infra — Option B]** Extract the cancellation-aware iteration logic into a Kernel-side (or plain, `net10.0`-referenceable) helper and unit-test the **G-5 cancellation contract** (token honored, `OperationCanceledException` thrown) without WPF. Moderate effort; gives real automated coverage of the cancellation loop.
-- **[Test infra — Option C]** Full VM testability: re-target the test project to `net10.0-windows`, add a GUI `ProjectReference`, refactor `MainViewModel` for constructor injection (pairs naturally with **G-4**), and add a UI-`SynchronizationContext` test fixture to exercise dispatcher marshaling. Largest effort; broadest coverage.
-
-### Remaining [Approval] items (not yet actioned)
-
-- **G-4** — use (or remove) the DI container. *(Pairs well with Option C above.)*
-- **G-6** — enforce the declared product-range validation rule.
-- **G-7** — fix `HasErrors` swallowing exceptions and returning `true`.
-- **K-2** — make `NoOfEntries` consistent with `Data` (read-only / private setter).
-- **K-3 (values)** — only if `100_00` / grouping were genuine typos (reformatting already applied; values intentionally preserved per the PR #2 decision).
-- **K-5** — move `NextRandomNo` off the search type onto the generator.
+Outstanding items from this review (the remaining **[Approval]** findings and the deferred
+test-infrastructure options **B**/**C**) are now tracked as the single actionable backlog in
+[`TODO.md`](../../TODO.md). The findings and rationale above remain the reference for *why* each
+item exists; `TODO.md` is the source of truth for *what is scheduled next*.
